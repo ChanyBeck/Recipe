@@ -117,7 +117,7 @@
             ClientSize = new Size(768, 558);
             Controls.Add(tblMain);
             Name = "frmSearch";
-            Text = "frmSearch";
+            Text = "Search";
             tblMain.ResumeLayout(false);
             tblMain.PerformLayout();
             tblSearch.ResumeLayout(false);

@@ -1,15 +1,6 @@
-﻿using Microsoft.Data.SqlClient;
-using Microsoft.VisualBasic.ApplicationServices;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
+﻿using System.Data;
 using System.Diagnostics;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
+using CPUFramework;
 
 namespace RecipeWinForms
 {
@@ -19,39 +10,41 @@ namespace RecipeWinForms
         {
             InitializeComponent();
             btnSearch.Click += BtnSearch_Click;
+            gRecipes.CellDoubleClick += GRecipes_CellDoubleClick;
+            FormatGrid();
         }
 
         private void SearchForRecipes(string recipename)
         {
-            string sql = "select * from Recipe r where r.recipename is like '%" + recipename + "%'";
+            string sql = "select r.RecipeId, r.RecipeName from Recipe r where r.recipename like '%" + recipename + "%'";
             Debug.Print(sql);
-            DataTable dt = GetDataTable(sql);
+            DataTable dt = SQLUtility.GetDataTable(sql);
             gRecipes.DataSource = dt;
-           
+            gRecipes.Columns["RecipeId"].Visible = false;
         }
-        private string GetConnectionString()
+        private void ShowRecipeForm(int rowindex)
         {
-            var s = "Server=.\\SQLExpress;Database=HeartyHearthDB;Trusted_Connection=True";
-            return s;
+            int id = (int)gRecipes.Rows[rowindex].Cells["RecipeId"].Value;
+            frmRecipe frm = new();
+            frm.ShowForm(id);
+        }
+        private void FormatGrid()
+        {
+            gRecipes.AllowUserToAddRows = false;
+            gRecipes.ReadOnly = true;
+            gRecipes.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+            gRecipes.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+        }
+       
+        private void GRecipes_CellDoubleClick(object? sender, DataGridViewCellEventArgs e)
+        {
+            ShowRecipeForm(e.RowIndex);
         }
 
-        private DataTable GetDataTable(string sqlstatement)
-        {
-            DataTable dt = new();
-            SqlConnection conn = new();
-            conn.ConnectionString = GetConnectionString();
-            conn.Open();
-            SqlCommand cmd = new();
-            cmd.Connection = conn;
-            cmd.CommandText = sqlstatement;
-            SqlDataReader dr = cmd.ExecuteReader();
-            dt.Load(dr);
-            return dt;
-        }
         private void BtnSearch_Click(object? sender, EventArgs e)
         {
             SearchForRecipes(txtRecipeName.Text);
         }
-        
+
     }
 }
