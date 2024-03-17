@@ -41,7 +41,7 @@ namespace RecipeWinForms
             lst.DataSource = dt;
             lst.ValueMember = tablename + "Id";
             lst.DisplayMember = lst.Name.Substring(3);
-            lst.DataBindings.Add("SelectedValue", dt, lst.ValueMember, false, DataSourceUpdateMode.OnPropertyChanged);
+            lst.DataBindings.Add("SelectedValue", dtrecipe, lst.ValueMember, false, DataSourceUpdateMode.OnPropertyChanged);
         }
         public void SetControlBinding(Control c, DataTable dt)
         {

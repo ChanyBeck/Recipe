@@ -35,7 +35,7 @@ namespace RecipeWinForms
             gRecipes.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
             gRecipes.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
         }
-       
+
         private void GRecipes_CellDoubleClick(object? sender, DataGridViewCellEventArgs e)
         {
             ShowRecipeForm(e.RowIndex);

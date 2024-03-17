@@ -48,54 +48,59 @@
             tblMain.Dock = DockStyle.Fill;
             tblMain.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
             tblMain.Location = new Point(0, 0);
+            tblMain.Margin = new Padding(3, 4, 3, 4);
             tblMain.Name = "tblMain";
             tblMain.RowCount = 2;
             tblMain.RowStyles.Add(new RowStyle());
             tblMain.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            tblMain.Size = new Size(768, 558);
+            tblMain.Size = new Size(878, 744);
             tblMain.TabIndex = 0;
             // 
             // tblSearch
             // 
             tblSearch.AutoSize = true;
-            tblSearch.ColumnCount = 3;
+            tblSearch.ColumnCount = 4;
             tblSearch.ColumnStyles.Add(new ColumnStyle());
             tblSearch.ColumnStyles.Add(new ColumnStyle());
             tblSearch.ColumnStyles.Add(new ColumnStyle());
+            tblSearch.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 20F));
             tblSearch.Controls.Add(lblRecipeName, 0, 0);
             tblSearch.Controls.Add(txtRecipeName, 1, 0);
             tblSearch.Controls.Add(btnSearch, 2, 0);
-            tblSearch.Location = new Point(3, 3);
+            tblSearch.Location = new Point(3, 4);
+            tblSearch.Margin = new Padding(3, 4, 3, 4);
             tblSearch.Name = "tblSearch";
             tblSearch.RowCount = 1;
             tblSearch.RowStyles.Add(new RowStyle());
-            tblSearch.Size = new Size(295, 37);
+            tblSearch.Size = new Size(369, 59);
             tblSearch.TabIndex = 0;
             // 
             // lblRecipeName
             // 
             lblRecipeName.Anchor = AnchorStyles.Left;
             lblRecipeName.AutoSize = true;
-            lblRecipeName.Location = new Point(3, 8);
+            lblRecipeName.Location = new Point(3, 15);
             lblRecipeName.Name = "lblRecipeName";
-            lblRecipeName.Size = new Size(102, 21);
+            lblRecipeName.Size = new Size(126, 28);
             lblRecipeName.TabIndex = 0;
             lblRecipeName.Text = "Recipe Name";
             // 
             // txtRecipeName
             // 
-            txtRecipeName.Location = new Point(111, 3);
+            txtRecipeName.Location = new Point(135, 4);
+            txtRecipeName.Margin = new Padding(3, 4, 3, 4);
             txtRecipeName.Name = "txtRecipeName";
-            txtRecipeName.Size = new Size(100, 29);
+            txtRecipeName.Size = new Size(114, 34);
             txtRecipeName.TabIndex = 1;
             // 
             // btnSearch
             // 
             btnSearch.Anchor = AnchorStyles.Left;
             btnSearch.AutoSize = true;
-            btnSearch.Location = new Point(217, 3);
+            btnSearch.Location = new Point(255, 4);
+            btnSearch.Margin = new Padding(3, 4, 3, 4);
             btnSearch.Name = "btnSearch";
-            btnSearch.Size = new Size(75, 31);
+            btnSearch.Size = new Size(91, 51);
             btnSearch.TabIndex = 2;
             btnSearch.Text = "Search";
             btnSearch.UseVisualStyleBackColor = true;
@@ -104,18 +109,21 @@
             // 
             gRecipes.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             gRecipes.Dock = DockStyle.Fill;
-            gRecipes.Location = new Point(3, 46);
+            gRecipes.Location = new Point(3, 71);
+            gRecipes.Margin = new Padding(3, 4, 3, 4);
             gRecipes.Name = "gRecipes";
+            gRecipes.RowHeadersWidth = 51;
             gRecipes.RowTemplate.Height = 25;
-            gRecipes.Size = new Size(762, 509);
+            gRecipes.Size = new Size(872, 669);
             gRecipes.TabIndex = 1;
             // 
             // frmSearch
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(768, 558);
+            ClientSize = new Size(878, 744);
             Controls.Add(tblMain);
+            Margin = new Padding(3, 4, 3, 4);
             Name = "frmSearch";
             Text = "Search";
             tblMain.ResumeLayout(false);
