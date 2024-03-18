@@ -50,9 +50,9 @@ create table dbo.Mesurement(
 )
 create table dbo.Recipe(
     RecipeId int not null identity primary key,
-    UsersId int not null   
+    UsersId int null   
         constraint f_Users_Recipe foreign key references Users(UsersId),
-    CuisineId int not null 
+    CuisineId int null 
         constraint f_Cuisine_Recipe foreign key references Cuisine(CuisineId),
     RecipeName varchar(50) not null 
         constraint ck_Recipe_RecipeName_cannot_be_blank check(RecipeName<> '')
