@@ -37,10 +37,10 @@ namespace RecipeSystem
             if (id > 0)
             {
                 sql = string.Join(Environment.NewLine, $"update recipe set",
+                    $"RecipeName = '{dr["Recipename"]}',",
                     $"Calories = {dr["Calories"]},",
                     $"CuisineId = '{dr["CuisineId"]}',",
                     //$"DateArchived = '{dr["DateArchived"]}',",
-                    $"DateDrafted = '{dr["DateDrafted"]}',",
                     $"DatePublished = '{dr["DatePublished"]}',",
                     $"UsersId = '{dr["UsersId"]}'",
                     $"where recipeid = {dr["RecipeId"]}");

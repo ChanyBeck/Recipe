@@ -42,7 +42,6 @@
             lblPicture = new Label();
             lblRecipeStatus = new Label();
             txtCalories = new TextBox();
-            txtDateDrafted = new TextBox();
             txtDatePublished = new TextBox();
             txtDateArchived = new TextBox();
             lstUserName = new ComboBox();
@@ -53,6 +52,7 @@
             toolStripSeparator1 = new ToolStripSeparator();
             btnDelete = new ToolStripButton();
             toolStripSeparator2 = new ToolStripSeparator();
+            lblDateDrafted = new Label();
             tblMain.SuspendLayout();
             tsMain.SuspendLayout();
             SuspendLayout();
@@ -74,12 +74,12 @@
             tblMain.Controls.Add(lblPicture, 1, 3);
             tblMain.Controls.Add(lblRecipeStatus, 1, 8);
             tblMain.Controls.Add(txtCalories, 1, 4);
-            tblMain.Controls.Add(txtDateDrafted, 1, 5);
             tblMain.Controls.Add(txtDatePublished, 1, 6);
             tblMain.Controls.Add(txtDateArchived, 1, 7);
             tblMain.Controls.Add(lstUserName, 1, 0);
             tblMain.Controls.Add(lstCuisineType, 1, 1);
             tblMain.Controls.Add(txtRecipeName, 1, 2);
+            tblMain.Controls.Add(lblDateDrafted, 1, 5);
             tblMain.Location = new Point(0, 32);
             tblMain.Name = "tblMain";
             tblMain.RowCount = 9;
@@ -213,14 +213,6 @@
             txtCalories.Size = new Size(543, 34);
             txtCalories.TabIndex = 14;
             // 
-            // txtDateDrafted
-            // 
-            txtDateDrafted.Dock = DockStyle.Fill;
-            txtDateDrafted.Location = new Point(152, 203);
-            txtDateDrafted.Name = "txtDateDrafted";
-            txtDateDrafted.Size = new Size(543, 34);
-            txtDateDrafted.TabIndex = 15;
-            // 
             // txtDatePublished
             // 
             txtDatePublished.Dock = DockStyle.Fill;
@@ -300,6 +292,16 @@
             toolStripSeparator2.Name = "toolStripSeparator2";
             toolStripSeparator2.Size = new Size(6, 35);
             // 
+            // lblDateDrafted
+            // 
+            lblDateDrafted.AutoSize = true;
+            lblDateDrafted.BackColor = SystemColors.ControlLight;
+            lblDateDrafted.Dock = DockStyle.Fill;
+            lblDateDrafted.Location = new Point(152, 200);
+            lblDateDrafted.Name = "lblDateDrafted";
+            lblDateDrafted.Size = new Size(543, 40);
+            lblDateDrafted.TabIndex = 21;
+            // 
             // frmRecipe
             // 
             AutoScaleDimensions = new SizeF(11F, 28F);
@@ -334,7 +336,6 @@
         private Label lblPicture;
         private Label lblRecipeStatus;
         private TextBox txtCalories;
-        private TextBox txtDateDrafted;
         private TextBox txtDatePublished;
         private TextBox txtDateArchived;
         private ToolStrip tsMain;
@@ -345,5 +346,6 @@
         private ComboBox lstUserName;
         private ComboBox lstCuisineType;
         private TextBox txtRecipeName;
+        private Label lblDateDrafted;
     }
 }

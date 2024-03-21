@@ -108,11 +108,27 @@ namespace RecipeTest
         public void InsertNewRecord()
         {
             DataTable dt = SQLUtility.ExecuteSQL("select * from recipe where recipeid = 0");
-            dt.Rows.Add();
+            DataRow r = dt.Rows.Add();
 
             Assume.That(dt.Rows.Count == 1);
 
             int cuisineid = SQLUtility.GetFirstColumnFirstRowValue("select top 1 cuisineid from cuisine");
+            Assume.That(cuisineid > 0, "No Recipes in DB, cannot test");
+            int usersid = SQLUtility.GetFirstColumnFirstRowValue("select top 1 usersid from users");
+            Assume.That(cuisineid > 0, "No Recipes in DB, cannot test");
+            string recipename = "test " + DateTime.Now;
+
+            TestContext.WriteLine("insert recipe with recipe name " + recipename);
+
+            r["cuisineid"] = cuisineid;
+            r["usersid"] = usersid;
+            r["Calories"] = 100;
+            r["recipename"] = recipename;
+            Recipe.Save(dt);
+
+            int newid = SQLUtility.GetFirstColumnFirstRowValue("select * from recipe where recipename = " + recipename);
+            Assert.IsTrue(newid > 0, "recipe with name " + recipename + "is not found in DB");
+            TestContext.WriteLine("Recipe with recipename " + recipename + "exists in DB");
         }
         private int GetExisitingRecipeId()
         {
