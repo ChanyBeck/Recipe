@@ -28,15 +28,19 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             tblMain = new TableLayoutPanel();
             tblSearch = new TableLayoutPanel();
             lblRecipeName = new Label();
             txtRecipeName = new TextBox();
             btnSearch = new Button();
             gRecipes = new DataGridView();
+            bindingSource1 = new BindingSource(components);
+            btnNew = new Button();
             tblMain.SuspendLayout();
             tblSearch.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)gRecipes).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)bindingSource1).BeginInit();
             SuspendLayout();
             // 
             // tblMain
@@ -63,16 +67,17 @@
             tblSearch.ColumnStyles.Add(new ColumnStyle());
             tblSearch.ColumnStyles.Add(new ColumnStyle());
             tblSearch.ColumnStyles.Add(new ColumnStyle());
-            tblSearch.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 20F));
+            tblSearch.ColumnStyles.Add(new ColumnStyle());
             tblSearch.Controls.Add(lblRecipeName, 0, 0);
             tblSearch.Controls.Add(txtRecipeName, 1, 0);
             tblSearch.Controls.Add(btnSearch, 2, 0);
+            tblSearch.Controls.Add(btnNew, 3, 0);
             tblSearch.Location = new Point(3, 4);
             tblSearch.Margin = new Padding(3, 4, 3, 4);
             tblSearch.Name = "tblSearch";
             tblSearch.RowCount = 1;
             tblSearch.RowStyles.Add(new RowStyle());
-            tblSearch.Size = new Size(369, 59);
+            tblSearch.Size = new Size(479, 59);
             tblSearch.TabIndex = 0;
             // 
             // lblRecipeName
@@ -117,6 +122,17 @@
             gRecipes.Size = new Size(872, 669);
             gRecipes.TabIndex = 1;
             // 
+            // btnNew
+            // 
+            btnNew.AutoSize = true;
+            btnNew.Dock = DockStyle.Fill;
+            btnNew.Location = new Point(352, 3);
+            btnNew.Name = "btnNew";
+            btnNew.Size = new Size(124, 53);
+            btnNew.TabIndex = 3;
+            btnNew.Text = "New";
+            btnNew.UseVisualStyleBackColor = true;
+            // 
             // frmSearch
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
@@ -131,6 +147,7 @@
             tblSearch.ResumeLayout(false);
             tblSearch.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)gRecipes).EndInit();
+            ((System.ComponentModel.ISupportInitialize)bindingSource1).EndInit();
             ResumeLayout(false);
         }
 
@@ -142,5 +159,7 @@
         private TextBox txtRecipeName;
         private Button btnSearch;
         private DataGridView gRecipes;
+        private Button btnNew;
+        private BindingSource bindingSource1;
     }
 }

@@ -1,0 +1,122 @@
+using System.Data;
+
+namespace RecipeTest
+{
+    public class RecipeTests
+    {
+        [SetUp]
+        public void Setup()
+        {
+            DBManager.SetConnectionString("Server=.\\SQLExpress;Database=HeartyHearthDB;Trusted_Connection=True;TrustServerCertificate=True;");
+        }
+
+        [Test]
+        public void GetCuisineList()
+        {
+            int lstcount = SQLUtility.GetFirstColumnFirstRowValue("select total = count(*) from cuisine");
+
+            Assume.That(lstcount > 0, "No records in table, can't test");
+
+            TestContext.WriteLine("Num of cuisine in DB = " + lstcount);
+            TestContext.WriteLine("Ensure num of rows returned = " + lstcount);
+
+            DataTable dt = Recipe.GetList("cuisine", "cuisinetype");
+
+            Assert.IsTrue(dt.Rows.Count == lstcount, "Num of rows returned (" + dt.Rows.Count + ") does not equal to total cuisine types (" + lstcount + ")");
+            TestContext.WriteLine("Number of rows in Cuisine = " + dt.Rows.Count);
+        }
+
+        [Test]
+        public void GetUsersList()
+        {
+            int lstcount = SQLUtility.GetFirstColumnFirstRowValue("select total = count(*) from users");
+
+            Assume.That(lstcount > 0, "No records in table, cannot test");
+
+            TestContext.WriteLine("Num of users in DB = " + lstcount);
+            TestContext.WriteLine("Ensure num of rows returned = " + lstcount);
+
+            DataTable dt = Recipe.GetList("users", "username");
+
+            Assert.IsTrue(dt.Rows.Count == lstcount, "Num of rows returned (" + dt.Rows.Count + ") does not equal to total username in DB (" + lstcount + ")");
+            TestContext.WriteLine("Number of rows in users = " + dt.Rows.Count);
+        }
+
+        [Test]
+        public void LoadRecipe()
+        {
+            int recipeid = GetExisitingRecipeId();
+
+            Assume.That(recipeid > 0, "No recipes in DB, cannot test");
+
+            TestContext.WriteLine("recipe id in DB = " + recipeid);
+            TestContext.WriteLine("Ensure recipe id returned = " + recipeid);
+
+            DataTable dt = Recipe.Load(recipeid);
+            int loadedid = (int)dt.Rows[0]["RecipeId"];
+
+            Assert.IsTrue(loadedid == recipeid, "recipe id returned (" + loadedid + "), does not equal to DB (" + recipeid + ")");
+            TestContext.WriteLine("Loaded recipe id = " + recipeid);
+        }
+
+        [Test]
+        public void DeleteRecipe()
+        {
+            DataTable dt = SQLUtility.ExecuteSQL("select top 1 r.RecipeId, r.Recipename from Recipe r left join MealCourseRecipe mcr on mcr.RecipeId = r.RecipeId left join BookRecipe br on br.RecipeId = r.RecipeId where br.CookBookId is null and mcr.MealCourseId is null");
+            int recipeid = 0;
+            string recipedesc = "";
+            if (dt.Rows.Count > 0)
+            {
+                recipeid = (int)dt.Rows[0]["recipeid"];
+                recipedesc = dt.Rows[0]["Recipename"].ToString();
+            }
+
+            Assume.That(recipeid > 0, "No recipes without related tables in DB, cannot test");
+
+            TestContext.WriteLine("recipe id with no related tables in DB = " + recipeid + " and recipename = " + recipedesc);
+            TestContext.WriteLine("Ensure app can delete recipe id " + recipeid);
+
+            Recipe.Delete(dt);
+
+            DataTable dtafterdelete = SQLUtility.ExecuteSQL("select * from recipe where recipeid = " + recipeid);
+
+            Assert.IsTrue(dtafterdelete.Rows.Count == 0, "recipe with id (" + recipeid  + ") exists in DB");
+            TestContext.WriteLine("recipe with id " + recipeid + " and recipe name " + recipedesc + " deleted from DB");
+        }
+
+        [Test]
+        public void UpdateRecipeCalories()
+        {
+            int recipeid = GetExisitingRecipeId();
+            int calories = SQLUtility.GetFirstColumnFirstRowValue("select calories from recipe where recipeid = " + recipeid);
+
+            Assume.That(recipeid > 0, "No recipes without related tables in DB, cannot test");
+
+            TestContext.WriteLine("calories for recipe (" + recipeid + ") is " + calories);
+            calories += calories;
+            TestContext.WriteLine("Change calories for recipe (" + recipeid + ") to " + calories);
+
+            DataTable dt = Recipe.Load(recipeid);
+            dt.Rows[0]["Calories"] = calories;
+            Recipe.Save(dt);
+
+            int newcalories = SQLUtility.GetFirstColumnFirstRowValue("select calories from recipe where recipeid = " + recipeid);
+            Assert.IsTrue(newcalories == calories, "Calories for recipe (" + recipeid + ") equales " + newcalories);
+            TestContext.WriteLine("recipe with id " + recipeid + " has " + calories + " calories in DB");
+        }
+        [Test]
+        public void InsertNewRecord()
+        {
+            DataTable dt = SQLUtility.ExecuteSQL("select * from recipe where recipeid = 0");
+            dt.Rows.Add();
+
+            Assume.That(dt.Rows.Count == 1);
+
+            int cuisineid = SQLUtility.GetFirstColumnFirstRowValue("select top 1 cuisineid from cuisine");
+        }
+        private int GetExisitingRecipeId()
+        {
+            return SQLUtility.GetFirstColumnFirstRowValue("select top 1 recipeid from recipe");
+        }
+    }
+}
