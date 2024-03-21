@@ -50,21 +50,22 @@ create table dbo.Mesurement(
 )
 create table dbo.Recipe(
     RecipeId int not null identity primary key,
-    UsersId int null   
+    UsersId int not null   
         constraint f_Users_Recipe foreign key references Users(UsersId),
-    CuisineId int null 
+    CuisineId int not null 
         constraint f_Cuisine_Recipe foreign key references Cuisine(CuisineId),
     RecipeName varchar(50) not null 
-        constraint ck_Recipe_RecipeName_cannot_be_blank check(RecipeName<> '')
+        constraint ck_Recipe_RecipeName_cannot_be_blank check(RecipeName <> '')
         constraint u_Recipe_RecipeName unique,
-    Picture as concat('Recipe_', replace(RecipeName, ' ', '_'), '.jpg') persisted,
     Calories int not null 
         constraint ck_Recipe_Calories_must_be_greater_than_zero check(Calories >= 0),
-    DateDrafted datetime not null default getdate(),
-    DatePublished datetime null 
+    DateDrafted datetime not null default getdate()
+        constraint ck_Recipe_Date_Drafted_must_be_later_than_current_date check(DateDrafted <= getdate()),
+    DatePublished datetime null
         constraint ck_Recipe_Date_Published_must_be_later_than_current_date check(DatePublished <= getdate()),
     DateArchived datetime null 
         constraint ck_Recipe_Date_Archived_must_be_later_than_current_date check(DateArchived <= getdate()),
+    Picture as concat('Recipe_', replace(RecipeName, ' ', '_'), '.jpg') persisted,
     RecipeStatus as case
         when DatePublished is null and DateArchived is null then 'Draft'
         when DateArchived is null then 'Published'
@@ -112,9 +113,10 @@ create table dbo.Meal(
     MealName varchar(50) not null 
         constraint ck_Meal_MealName_cannot_be_blank check(MealName <> '')
         constraint u_Meal_MealName unique,
-    Picture as concat('Meal_', replace(MealName, ' ', '_'), '.jpg') persisted,
-    IsActive bit not null, 
-    MealCreated datetime not null default getdate()
+    IsActive bit not null default 1,
+    MealCreated date not null default getdate()
+        constraint ck_Meal_Created_must_be_later_than_current_date check(MealCreated <= getdate()),
+    Picture as concat('Meal_', replace(MealName, ' ', '_'), '.jpg') persisted
 )
 
 create table dbo.MealCourse(
@@ -139,9 +141,10 @@ create table dbo.CookBook(
         constraint u_CookBook_Title unique,
     Price decimal(5,2) not null 
         constraint ck_CookBook_Price_must_be_greater_than_zero check(Price > 0),
-    Picture as concat('CookBook_', replace(Title, ' ', '_'), '.jpg') persisted,
-    IsActive bit not null, 
+    IsActive bit not null default 1, 
     BookCreated datetime not null default getdate()
+        constraint ck_CookBook_Book_Created_must_be_later_than_current_date check(BookCreated <= getdate()),
+    Picture as concat('CookBook_', replace(Title, ' ', '_'), '.jpg') persisted,
 )
 
 create table dbo.BookRecipe(
