@@ -68,7 +68,7 @@ with x as(
     union select 'MCaines', 'English', 'Cheese Bread', 200, null, null
     union select 'GFieri', 'American', 'Butter Muffins', 150, getdate(), null
     union select 'JOliver', 'Italien', 'Maple Fish', 120, null, null
-    union select 'JOliver','French', 'Rib Steak', 250, null, getdate()
+    union select 'JOliver','French', 'Rib Steak', 250, null, null
     union select 'GRamsay', 'English', 'Brownie', 100, null, null
     union select 'GRamsay', 'American', 'Hash Browns', 100, getdate(), null
 )
@@ -268,7 +268,7 @@ join Recipe r
 on r.RecipeName = x.Recipe
 ;
 with x as(
-    select Recipe = 'Rib Steak', IsMain = 1
+    select Recipe = 'Maple Fish', IsMain = 1
     union select 'Hash Browns', 0
 )
 insert MealCourseRecipe(MealCourseId, RecipeId, IsMain)
@@ -382,7 +382,6 @@ with x as(
     union select 'Maple Fish', 3
     union select 'Butter Muffins', 4
     union select 'Brownie', 5
-    union select 'Rib Steak', 6
 )
 insert BookRecipe(CookBookId, RecipeId, BookRecipeSequence)
 select cb.CookBookId, r.RecipeId, x.RecipeSequence
@@ -396,7 +395,6 @@ on r.RecipeName = x.Recipe
 with x as(
     select Recipe = 'Brownie', RecipeSequence = 1
     union select 'Apple Yogurt Smoothie', 2
-    union select 'Rib Steak', 3
     union select 'Butter Muffins', 4
     union select 'Cheese Bread', 5
     union select 'Hash Browns', 6

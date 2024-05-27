@@ -1,7 +1,6 @@
 ﻿using System.Data;
 using System.Diagnostics;
-using CPUWindowsFormsFramework;
-using RecipeSystem;
+
 
 namespace RecipeWinForms
 {
@@ -32,7 +31,6 @@ namespace RecipeWinForms
             frmRecipe frm = new();
             frm.ShowForm(id);
         }
-
 
         private void GRecipes_CellDoubleClick(object? sender, DataGridViewCellEventArgs e)
         {
