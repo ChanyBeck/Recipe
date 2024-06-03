@@ -1,3 +1,4 @@
 ﻿global using CPUWindowsFormsFramework;
 global using RecipeSystem;
-global using System.Data.SqlClient;
+global using CPUFramework;
+global using System.Data;
