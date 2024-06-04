@@ -8,10 +8,10 @@ drop table if exists MealCourse
 drop table if exists Meal
 drop table if exists Course
 drop table if exists RecipeDirection
-drop table if exists RecipeIngrediant
+drop table if exists RecipeIngredient
 drop table if exists Recipe
 drop table if exists Mesurement
-drop table if exists Ingrediant
+drop table if exists Ingredient
 drop table if exists Cuisine
 drop table if exists Users
 go 
@@ -34,12 +34,12 @@ create table dbo.Cuisine(
         constraint u_Cuisine_CuisineType unique
 )
 
-create table dbo.Ingrediant(
-    IngrediantId int not null identity primary key,
-    IngrediantName varchar(50) not null 
-        constraint ck_Ingrediant_Name_canot_be_blank check(IngrediantName <> '')
-        constraint u_Ingrediant_IngrediantName_unique unique,
-    Picture as concat('Ingrediant_', replace(IngrediantName, ' ', '_'), '.jpg') persisted,
+create table dbo.Ingredient(
+    ingredientId int not null identity primary key,
+    ingredientName varchar(50) not null 
+        constraint ck_ingredient_Name_canot_be_blank check(ingredientName <> '')
+        constraint u_ingredient_ingredientName_unique unique,
+    Picture as concat('ingredient_', replace(ingredientName, ' ', '_'), '.jpg') persisted,
 )
 
 create table dbo.Mesurement(
@@ -75,17 +75,17 @@ create table dbo.Recipe(
     constraint ck_Recipe_Date_Archived_must_be_greater_than_Date_Published_and_Date_drafted check(DateArchived >= DatePublished and DateArchived >= DateDrafted)
 )
 
-create table dbo.RecipeIngrediant(
-    RecipeIngrediantId int not null identity primary key, 
-    RecipeId int not null constraint f_Recipe_RecipeIngrediant foreign key references Recipe(RecipeId),
-    IngrediantId int not null constraint f_Ingrediant_RecipeIngrediant foreign key references Ingrediant(IngrediantId),
-    MesurementId int null constraint f_Mesurement_RecipeIngrediant foreign key references Mesurement(MesurementId),
+create table dbo.RecipeIngredient(
+    RecipeIngredientId int not null identity primary key, 
+    RecipeId int not null constraint f_Recipe_Recipeingredient foreign key references Recipe(RecipeId),
+    IngredientId int not null constraint f_ingredient_Recipeingredient foreign key references ingredient(ingredientId),
+    MesurementId int null constraint f_Mesurement_Recipeingredient foreign key references Mesurement(MesurementId),
     Amount decimal(5,2) not null 
-        constraint ck_RecipeIngrediant_Amount_must_be_greater_than_zero check(Amount > 0),
-    IngrediantSequence int not null 
-        constraint ck_RecipeIngrediant_Ingrediant_Sequence_must_be_greater_than_zero check(IngrediantSequence > 0),
-    constraint u_RecipeIngrediant_Recipe_Ingrediant_Sequence unique(RecipeId, IngrediantSequence),
-    constraint u_RecipeIngrediant_Recipe_Ingrediant unique(RecipeId, IngrediantId)
+        constraint ck_Recipeingredient_Amount_must_be_greater_than_zero check(Amount > 0),
+    ingredientSequence int not null 
+        constraint ck_Recipeingredient_ingredient_Sequence_must_be_greater_than_zero check(ingredientSequence > 0),
+    constraint u_Recipeingredient_Recipe_ingredient_Sequence unique(RecipeId, ingredientSequence),
+    constraint u_Recipeingredient_Recipe_ingredient unique(RecipeId, ingredientId)
 )
 
 create table dbo.RecipeDirection(
