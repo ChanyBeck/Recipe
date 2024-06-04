@@ -1,12 +1,20 @@
-create or alter procedure dbo.CuisineGet(@CuisineId int = 0, @All bit = 0, @CuisineType varchar(50) = '')  
+create or alter procedure dbo.CuisineGet(
+    @CuisineId int = 0, 
+    @All bit = 0, 
+    @Message varchar(500) = ''  output
+)  
 as 
 begin 
-    select @CuisineType = nullif(@CuisineType, '')
-    select * 
-    from cuisine c 
-    where c.CuisineId = @CuisineId
-    or @All = 1 
-    or c.CuisineType like '%' + @CuisineType + '%'
+    declare @return int = 0
+
+	select @All = isnull(@All,0), @CuisineId = isnull(@CuisineId,0)
+
+	select c.CuisineId, c.cuisinetype
+	from Cuisine c
+	where CuisineId = @CuisineId
+	or @All = 1
+	order by c.CuisineType
+
+	return @return
 end
 go 
-
