@@ -30,15 +30,18 @@ namespace RecipeTest
         [Test]
         public void SaveMultipleRows()
         {
-            DataTable dt = DataMaintenance.GetList("Recipe");
+            DataTable dt = DataMaintenance.GetList("Cuisine");
             var dr = dt.Rows.Add();
-            dr["RecipeName"] = "TestCuisine1";
-            dr["RecipeName"] = "TestCuisine2";
-            dt.Rows[0]["RecipeName"] = "TestChange1";
+            dr["CuisineType"] = "TestCuisine1";
+            dr["CuisineType"] = "TestCuisine2";
+            dt.Rows[0]["CuisineType"] = "TestChange1";
             SQLUtility.SaveDataTable(dt, "RecipeUpdate");
+            SQLUtility.SaveDataTable(dt, "CuisineUpdate");
 
-            string sql = "select * from Recipe where recipename in (TestCuisine1, TestCuisine2,TestChange1) ";
-
+            string sql = "select * from Cuisine where CuisineType in ('TestCuisine1', 'TestCuisine2', 'TestChange1')";
+            DataTable dtcheck = SQLUtility.ExecuteSQL(sql);
+            Assert.IsTrue(dtcheck.Rows.Count == 3, $"num rows of dtcheck is {dt.Rows.Count}");
+            TestContext.WriteLine($"num rows of dtcheck should be 3 and it is {dt.Rows.Count}");
         }
 
         [Test]
