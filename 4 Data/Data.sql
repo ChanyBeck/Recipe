@@ -71,6 +71,7 @@ with x as(
     union select 'JOliver','French', 'Rib Steak', 250, null, null
     union select 'GRamsay', 'English', 'Brownie', 100, null, null
     union select 'GRamsay', 'American', 'Hash Browns', 100, getdate(), null
+    union select 'JOliver', 'Italien', 'Eggs', 50, null, null
 )
 insert Recipe(UsersId, CuisineId, RecipeName, Calories, DatePublished, DateArchived)
 select u.UsersId, c.CuisineId, x.RecipeName, x.Calories, x.DatePublished, x.DateArchived
