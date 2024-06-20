@@ -35,6 +35,8 @@
             menuCascade = new ToolStripMenuItem();
             menuTile = new ToolStripMenuItem();
             cascadeToolStripMenuItem = new ToolStripMenuItem();
+            menuDataMaintenance = new ToolStripMenuItem();
+            menuData = new ToolStripMenuItem();
             tsMain = new ToolStrip();
             menuMain.SuspendLayout();
             SuspendLayout();
@@ -42,7 +44,7 @@
             // menuMain
             // 
             menuMain.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            menuMain.Items.AddRange(new ToolStripItem[] { menuRecipe, menuCascade });
+            menuMain.Items.AddRange(new ToolStripItem[] { menuRecipe, menuCascade, menuDataMaintenance });
             menuMain.Location = new Point(0, 0);
             menuMain.Name = "menuMain";
             menuMain.Size = new Size(1029, 29);
@@ -54,7 +56,7 @@
             menuRecipe.DropDownItems.AddRange(new ToolStripItem[] { menuSearch, menuNewRecipe });
             menuRecipe.Name = "menuRecipe";
             menuRecipe.Size = new Size(68, 25);
-            menuRecipe.Text = "Recipe";
+            menuRecipe.Text = "&Recipe";
             // 
             // menuSearch
             // 
@@ -86,6 +88,19 @@
             cascadeToolStripMenuItem.Name = "cascadeToolStripMenuItem";
             cascadeToolStripMenuItem.Size = new Size(137, 26);
             cascadeToolStripMenuItem.Text = "Cascade";
+            // 
+            // menuDataMaintenance
+            // 
+            menuDataMaintenance.DropDownItems.AddRange(new ToolStripItem[] { menuData });
+            menuDataMaintenance.Name = "menuDataMaintenance";
+            menuDataMaintenance.Size = new Size(147, 25);
+            menuDataMaintenance.Text = "&Data Maintenance";
+            // 
+            // menuData
+            // 
+            menuData.Name = "menuData";
+            menuData.Size = new Size(180, 26);
+            menuData.Text = "&Data";
             // 
             // tsMain
             // 
@@ -125,5 +140,7 @@
         private ToolStripMenuItem menuTile;
         private ToolStripMenuItem cascadeToolStripMenuItem;
         private ToolStrip tsMain;
+        private ToolStripMenuItem menuDataMaintenance;
+        private ToolStripMenuItem menuData;
     }
 }

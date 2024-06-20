@@ -10,7 +10,7 @@ drop table if exists Course
 drop table if exists RecipeDirection
 drop table if exists RecipeIngredient
 drop table if exists Recipe
-drop table if exists Mesurement
+drop table if exists Measurement
 drop table if exists Ingredient
 drop table if exists Cuisine
 drop table if exists Users
@@ -42,11 +42,11 @@ create table dbo.Ingredient(
     Picture as concat('ingredient_', replace(ingredientName, ' ', '_'), '.jpg') persisted,
 )
 
-create table dbo.Mesurement(
-    MesurementId int not null identity primary key, 
-    MesurementType varchar(20) not null
-        constraint ck_Mesurement_Type_cannot_be_blank check(MesurementType <> '')
-        constraint u_Mesurement_MesurementType unique 
+create table dbo.Measurement(
+    measurementId int not null identity primary key, 
+    measurementType varchar(20) not null
+        constraint ck_measurement_Type_cannot_be_blank check(measurementType <> '')
+        constraint u_measurement_measurementType unique 
 )
 create table dbo.Recipe(
     RecipeId int not null identity primary key,
@@ -79,7 +79,7 @@ create table dbo.RecipeIngredient(
     RecipeIngredientId int not null identity primary key, 
     RecipeId int not null constraint f_Recipe_Recipeingredient foreign key references Recipe(RecipeId),
     IngredientId int not null constraint f_ingredient_Recipeingredient foreign key references ingredient(ingredientId),
-    MesurementId int null constraint f_Mesurement_Recipeingredient foreign key references Mesurement(MesurementId),
+    measurementId int null constraint f_measurement_Recipeingredient foreign key references measurement(measurementId),
     Amount decimal(5,2) not null 
         constraint ck_Recipeingredient_Amount_must_be_greater_than_zero check(Amount > 0),
     ingredientSequence int not null 

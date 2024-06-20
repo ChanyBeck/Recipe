@@ -1,4 +1,5 @@
 using System.Data;
+using System.Data.SqlClient;
 
 namespace RecipeTest
 {
@@ -24,6 +25,20 @@ namespace RecipeTest
 
             Assert.IsTrue(dt.Rows.Count == lstcount, "Num of rows returned (" + dt.Rows.Count + ") does not equal to total cuisine types (" + lstcount + ")");
             TestContext.WriteLine("Number of rows in Cuisine = " + dt.Rows.Count);
+        }
+
+        [Test]
+        public void SaveMultipleRows()
+        {
+            DataTable dt = DataMaintenance.GetList("Recipe");
+            var dr = dt.Rows.Add();
+            dr["RecipeName"] = "TestCuisine1";
+            dr["RecipeName"] = "TestCuisine2";
+            dt.Rows[0]["RecipeName"] = "TestChange1";
+            SQLUtility.SaveDataTable(dt, "RecipeUpdate");
+
+            string sql = "select * from Recipe where recipename in (TestCuisine1, TestCuisine2,TestChange1) ";
+
         }
 
         [Test]
