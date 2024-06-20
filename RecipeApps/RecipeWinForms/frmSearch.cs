@@ -14,7 +14,6 @@ namespace RecipeWinForms
             btnNew.Click += BtnNew_Click;
             txtRecipeName.KeyDown += TxtRecipeName_KeyDown;
             gRecipes.KeyDown += GRecipes_KeyDown;
-            WindowsFormsUtility.FormatGridForSearch(gRecipes);
         }
 
 
@@ -25,7 +24,7 @@ namespace RecipeWinForms
                 this.Cursor = Cursors.WaitCursor;
                 DataTable dt = Recipe.SearchRecipe(recipename);
                 gRecipes.DataSource = dt;
-                gRecipes.Columns["RecipeId"].Visible = false;
+                WindowsFormsUtility.FormatGridForSearch(gRecipes, "recipe");
                 if (gRecipes.Rows.Count > 0)
                 {
                     gRecipes.Focus();

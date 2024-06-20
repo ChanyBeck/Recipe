@@ -8,10 +8,10 @@ delete MealCourse
 delete Meal
 delete Course
 delete RecipeDirection
-delete RecipeIngrediant
+delete RecipeIngredient
 delete Recipe
-delete Mesurement
-delete Ingrediant
+delete Measurement
+delete Ingredient
 delete Cuisine
 delete Users
 go 
@@ -28,7 +28,7 @@ union select 'American'
 union select 'Italian'
 union select 'English'
 
-insert Ingrediant(IngrediantName)
+insert Ingredient(IngredientName)
 select 'Sugar'
 union select 'Oil'
 union select 'Flour'
@@ -52,7 +52,7 @@ union select 'Whipped Cream Cheese'
 union select 'Sour Cream Cheese'
 union select 'Vanilla Pudding'
 
-insert Mesurement(MesurementType)
+insert measurement(measurementType)
 select 'Cup'
 union select 'Tsp'
 union select 'Tbsp'
@@ -82,7 +82,7 @@ on x.CuisineType = c.CuisineType
 
 ;
 with x as(
-    select Recipe = 'Chocolate Chip Cookies', Ingrediant = 'Sugar', Mesurement = 'Cup', Amount = 1, IngrediantSequence = 1
+    select Recipe = 'Chocolate Chip Cookies', Ingredient = 'Sugar', measurement = 'Cup', Amount = 1, IngredientSequence = 1
     union select 'Chocolate Chip Cookies', 'Oil', 'Cup', 0.5, 2
     union select 'Chocolate Chip Cookies', 'Eggs', null, 3, 3
     union select 'Chocolate Chip Cookies', 'Flour', 'Cup', 2, 4
@@ -111,15 +111,15 @@ with x as(
     union select 'Butter Muffins', 'Flour', 'Cup', 1, 7
     union select 'Butter Muffins', 'Baking Powder', 'Tsp', 2, 8
 )
-insert RecipeIngrediant(RecipeId, IngrediantId, MesurementId, Amount, IngrediantSequence)
-select r.RecipeId, i.IngrediantId, m.MesurementId, x.Amount, x.IngrediantSequence 
+insert RecipeIngredient(RecipeId, IngredientId, measurementId, Amount, IngredientSequence)
+select r.RecipeId, i.ingredientId, m.measurementId, x.Amount, x.ingredientSequence 
 from x
 join Recipe r
 on r.RecipeName = x.Recipe
-join Ingrediant i 
-on i.IngrediantName = x.Ingrediant
-left join Mesurement m 
-on m.MesurementType = x.Mesurement
+join ingredient i 
+on i.ingredientName = x.ingredient
+left join measurement m 
+on m.measurementType = x.measurement
 
 ;
 with x as(
@@ -412,10 +412,10 @@ on r.RecipeName = x.Recipe
 
 select * from Users
 select * from Cuisine
-select * from Ingrediant 
-select * from Mesurement
+select * from ingredient 
+select * from measurement
 select * from Recipe
-select * from RecipeIngrediant 
+select * from Recipeingredient 
 select * from RecipeDirection
 select * from Course
 select * from Meal
