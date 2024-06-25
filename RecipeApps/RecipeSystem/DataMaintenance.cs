@@ -12,5 +12,10 @@ namespace RecipeSystem
             cmd.Parameters["@All"].Value = 1;
             return SQLUtility.GetDataTable(cmd);
         }
+
+        public static void SaveDataList(DataTable dt, string tablename)
+        {
+            SQLUtility.SaveDataTable(dt, tablename + "Update");
+        }
     }
 }

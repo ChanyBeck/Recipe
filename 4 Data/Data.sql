@@ -67,11 +67,11 @@ with x as(
     union select 'GFieri', 'French', 'Apple Yogurt Smoothie', 80, getdate(), null
     union select 'MCaines', 'English', 'Cheese Bread', 200, null, null
     union select 'GFieri', 'American', 'Butter Muffins', 150, getdate(), null
-    union select 'JOliver', 'Italien', 'Maple Fish', 120, null, null
+    union select 'JOliver', 'Italian', 'Maple Fish', 120, null, null
     union select 'JOliver','French', 'Rib Steak', 250, null, null
     union select 'GRamsay', 'English', 'Brownie', 100, null, null
     union select 'GRamsay', 'American', 'Hash Browns', 100, getdate(), null
-    union select 'JOliver', 'Italien', 'Eggs', 50, null, null
+    union select 'JOliver', 'Italian', 'Eggs', 50, null, null
 )
 insert Recipe(UsersId, CuisineId, RecipeName, Calories, DatePublished, DateArchived)
 select u.UsersId, c.CuisineId, x.RecipeName, x.Calories, x.DatePublished, x.DateArchived
