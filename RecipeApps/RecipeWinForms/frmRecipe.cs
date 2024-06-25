@@ -1,4 +1,6 @@
 ﻿
+using RecipeSystem;
+
 namespace RecipeWinForms
 {
     public partial class frmRecipe : Form
@@ -34,11 +36,12 @@ namespace RecipeWinForms
             WindowsFormsUtility.SetControlBinding(txtDateArchived, bs);
             WindowsFormsUtility.SetControlBinding(lblDateDrafted, bs);
             WindowsFormsUtility.SetControlBinding(txtDatePublished, bs);
-            WindowsFormsUtility.SetControlBinding(lblPicture, bs);
+            //WindowsFormsUtility.SetControlBinding(lblPicture, bs);
             WindowsFormsUtility.SetControlBinding(txtRecipeName, bs);
             WindowsFormsUtility.SetControlBinding(lblRecipeStatus, bs);
             this.Text = GetRecipeDesc();
             this.Show();
+            frmSearch.SearchForRecipes(recipeid.ToString(), "RecipeIngredient");
         }
 
         private bool Save()

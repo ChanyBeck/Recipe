@@ -30,15 +30,19 @@ namespace RecipeTest
         [Test]
         public void SaveMultipleRows()
         {
+            string sql = "delete Cuisine where cuisinetype in ('TestCuisine1', 'TestCuisine1')";
+            SQLUtility.ExecuteSQL(sql);
+            sql = "update cuisine set cuisinetype = 'cuisine' where cuisinetype = 'TestChange1'";
+            SQLUtility.ExecuteSQL(sql);
             DataTable dt = DataMaintenance.GetList("Cuisine");
             var dr = dt.Rows.Add();
             dr["CuisineType"] = "TestCuisine1";
+            dr = dt.Rows.Add();
             dr["CuisineType"] = "TestCuisine2";
             dt.Rows[0]["CuisineType"] = "TestChange1";
-            SQLUtility.SaveDataTable(dt, "RecipeUpdate");
             SQLUtility.SaveDataTable(dt, "CuisineUpdate");
 
-            string sql = "select * from Cuisine where CuisineType in ('TestCuisine1', 'TestCuisine2', 'TestChange1')";
+            sql = "select * from Cuisine where CuisineType in ('TestCuisine1', 'TestCuisine2', 'TestChange1')";
             DataTable dtcheck = SQLUtility.ExecuteSQL(sql);
             Assert.IsTrue(dtcheck.Rows.Count == 3, $"num rows of dtcheck is {dt.Rows.Count}");
             TestContext.WriteLine($"num rows of dtcheck should be 3 and it is {dt.Rows.Count}");

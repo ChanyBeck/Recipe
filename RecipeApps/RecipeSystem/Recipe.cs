@@ -13,6 +13,7 @@ namespace RecipeSystem
 {
     public class Recipe
     {
+
         public static DataTable SearchRecipe(string recipename)
         {
             DataTable dt = new();
@@ -28,6 +29,16 @@ namespace RecipeSystem
             DataTable dt = new();
 
             SqlCommand cmd = SQLUtility.GetSQLCommand("RecipeGet");
+
+            cmd.Parameters["@RecipeId"].Value = id;
+
+            return SQLUtility.GetDataTable(cmd);
+        }
+        public static DataTable LoadIngredients(int id)
+        {
+            DataTable dt = new();
+
+            SqlCommand cmd = SQLUtility.GetSQLCommand("RecipeIngredientGet");
 
             cmd.Parameters["@RecipeId"].Value = id;
 
