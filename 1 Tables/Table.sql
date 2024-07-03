@@ -152,7 +152,7 @@ create table dbo.BookRecipe(
     CookBookId int not null constraint f_CookBook_BookRecipe foreign key references CookBook(CookBookId),
     RecipeId int not null constraint f_Recipe_BookRecipe foreign key references Recipe(RecipeId), 
     BookRecipeSequence int not null
-        constraint ck_BookRecipe_Sequnce_must_be_greater_than_zero check(BookRecipeSequence > 0), 
+        constraint ck_BookRecipe_Sequnce_must_be_greater_than_zero check(BookRecipeSequence > 0)
     constraint u_BookRecipe_Book_Recipe unique(CookBookId, RecipeId), 
     constraint u_BookRecipe_Book_BookRecipeSequence unique(CookBookId, BookRecipeSequence)
 )

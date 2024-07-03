@@ -7,11 +7,13 @@ namespace RecipeWinForms
         private enum TableTypeEnum { Users, Cuisine, Ingredient, Measurement, Course};
         DataTable dtlist = new();
         TableTypeEnum currenttabletype = TableTypeEnum.Ingredient;
+        string delete = "deletecol";
         public frmDataMaintenance()
         {
             InitializeComponent();
             btnSave.Click += BtnSave_Click;
             this.FormClosing += FrmDataMaintenance_FormClosing;
+            gData.CellContentClick += GData_CellContentClick;
             BindData(currenttabletype);
             SetupRadioButtons();
         }
@@ -21,8 +23,11 @@ namespace RecipeWinForms
         {
             currenttabletype = tabletype;
             dtlist = DataMaintenance.GetList(currenttabletype.ToString());
+            gData.Columns.Clear();
             gData.DataSource = dtlist;
+            gData.Columns.Add(new DataGridViewButtonColumn() {Text = "X", HeaderText = "Delete", Name = delete, UseColumnTextForButtonValue = true});
             WindowsFormsUtility.FormatGridForEdit(gData, currenttabletype.ToString());
+
         }
         private bool Save()
         {
@@ -32,6 +37,7 @@ namespace RecipeWinForms
             {
                 DataMaintenance.SaveDataList(dtlist, currenttabletype.ToString());
                 b = true;
+                BindData(currenttabletype);
             }
             catch(Exception ex)
             {
@@ -42,6 +48,26 @@ namespace RecipeWinForms
                 Cursor = Cursors.Default;
             }
             return b;
+        }
+        private void Delete(int rowindex)
+        {
+            int id = WindowsFormsUtility.GetIdFromGrid(gData, rowindex, currenttabletype.ToString() + "id");
+            if(id != 0)
+            {
+                try
+                {
+                    DataMaintenance.Delete(currenttabletype.ToString(), id);
+                    BindData(currenttabletype);
+                }
+                catch(Exception ex)
+                {
+                    MessageBox.Show(ex.Message, Application.ProductName);
+                }
+            }
+            else if( id == 0 && rowindex < gData.Rows.Count)
+            {
+                gData.Rows.Remove(gData.Rows[rowindex]);
+            }
         }
 
         private void SetupRadioButtons()
@@ -93,5 +119,15 @@ namespace RecipeWinForms
                 }
             }
         }
+
+        private void GData_CellContentClick(object? sender, DataGridViewCellEventArgs e)
+        {
+            if (gData.Columns[e.ColumnIndex].Name == delete)
+            {
+                Delete(e.RowIndex);
+            }
+        }
+
+
     }
 }

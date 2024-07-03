@@ -1,0 +1,93 @@
+﻿namespace RecipeWinForms
+{
+    partial class frmCookbookList
+    {
+        /// <summary>
+        /// Required designer variable.
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
+
+        /// <summary>
+        /// Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
+
+        #region Windows Form Designer generated code
+
+        /// <summary>
+        /// Required method for Designer support - do not modify
+        /// the contents of this method with the code editor.
+        /// </summary>
+        private void InitializeComponent()
+        {
+            tblMain = new TableLayoutPanel();
+            btnNewCookbook = new Button();
+            gridCookbook = new DataGridView();
+            tblMain.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)gridCookbook).BeginInit();
+            SuspendLayout();
+            // 
+            // tblMain
+            // 
+            tblMain.ColumnCount = 1;
+            tblMain.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 100F));
+            tblMain.Controls.Add(btnNewCookbook, 0, 0);
+            tblMain.Controls.Add(gridCookbook, 0, 1);
+            tblMain.Dock = DockStyle.Fill;
+            tblMain.Location = new Point(0, 0);
+            tblMain.Name = "tblMain";
+            tblMain.RowCount = 2;
+            tblMain.RowStyles.Add(new RowStyle());
+            tblMain.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+            tblMain.Size = new Size(800, 450);
+            tblMain.TabIndex = 0;
+            // 
+            // btnNewCookbook
+            // 
+            btnNewCookbook.AutoSize = true;
+            btnNewCookbook.Location = new Point(3, 3);
+            btnNewCookbook.Name = "btnNewCookbook";
+            btnNewCookbook.Size = new Size(99, 25);
+            btnNewCookbook.TabIndex = 0;
+            btnNewCookbook.Text = "&New Cookbook";
+            btnNewCookbook.UseVisualStyleBackColor = true;
+            // 
+            // gridCookbook
+            // 
+            gridCookbook.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            gridCookbook.Dock = DockStyle.Fill;
+            gridCookbook.Location = new Point(3, 34);
+            gridCookbook.Name = "gridCookbook";
+            gridCookbook.RowTemplate.Height = 25;
+            gridCookbook.Size = new Size(794, 413);
+            gridCookbook.TabIndex = 1;
+            // 
+            // frmCookbookList
+            // 
+            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleMode = AutoScaleMode.Font;
+            ClientSize = new Size(800, 450);
+            Controls.Add(tblMain);
+            Name = "frmCookbookList";
+            Text = "frmCookbookList";
+            tblMain.ResumeLayout(false);
+            tblMain.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)gridCookbook).EndInit();
+            ResumeLayout(false);
+        }
+
+        #endregion
+
+        private TableLayoutPanel tblMain;
+        private Button btnNewCookbook;
+        private DataGridView gridCookbook;
+    }
+}

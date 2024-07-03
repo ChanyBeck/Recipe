@@ -17,5 +17,12 @@ namespace RecipeSystem
         {
             SQLUtility.SaveDataTable(dt, tablename + "Update");
         }
+
+        public static void Delete(string tablename, int id)
+        {
+            SqlCommand cmd = SQLUtility.GetSQLCommand(tablename + "Delete");
+            SQLUtility.SetParameterValue(cmd, $"@{tablename}Id", id);
+            SQLUtility.ExecuteSQL(cmd);
+        }
     }
 }
