@@ -17,21 +17,13 @@ namespace RecipeWinForms
         }
 
 
-        public void SearchForRecipes(string recipename, string tablename)
+        public void SearchForRecipes(string recipename)
         {
+
             try
             {
                 this.Cursor = Cursors.WaitCursor;
-                DataTable dt = new();
-                switch (recipename)
-                {
-                    case int:
-                        dt = Recipe.LoadIngredients((int)recipename);
-                        break;
-                    case string:
-                        dt = Recipe.SearchRecipe(recipename.ToString());
-                        break;
-                }
+                DataTable dt = Recipe.SearchRecipe(recipename);
                 gRecipes.DataSource = dt;
                 WindowsFormsUtility.FormatGridForSearch(gRecipes, "recipe");
                 if (gRecipes.Rows.Count > 0)
@@ -49,12 +41,13 @@ namespace RecipeWinForms
                 this.Cursor = Cursors.Default;
             }
         }
+
         private void ShowRecipeForm(int rowindex)
         {
             int id = 0;
             if (rowindex > -1)
             {
-                id = (int)gRecipes.Rows[rowindex].Cells["RecipeId"].Value;
+                id = WindowsFormsUtility.GetIdFromGrid(gRecipes, rowindex, "RecipeId");
             }
             if (this.MdiParent != null && this.MdiParent is frmMain)
             {
@@ -64,7 +57,7 @@ namespace RecipeWinForms
 
         private void DoSearch()
         {
-            SearchForRecipes(txtRecipeName.Text, "recipe");
+            SearchForRecipes(txtRecipeName.Text);
         }
 
         private void GRecipes_CellDoubleClick(object? sender, DataGridViewCellEventArgs e)
