@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.VisualBasic;
+using System;
+using System.CodeDom;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -22,7 +24,9 @@ namespace RecipeWinForms
             menuData.Click += MenuData_Click;
             menuCookbooksList.Click += MenuCookbooksList_Click;
             menuRecipesList.Click += MenuRecipesList_Click;
-
+            menuDashboard.Click += MenuDashboard_Click;
+            menuMealsList.Click += MenuMealsList_Click;
+            OpenForm(typeof(frmDashboard));
         }
 
 
@@ -63,7 +67,18 @@ namespace RecipeWinForms
                     newfrm = f;
                     f.Show();
                 }
-
+                else if (frmtype == typeof(frmDashboard))
+                {
+                    frmDashboard f = new();
+                    newfrm = f;
+                    f.Show();
+                }
+                else if (frmtype == typeof(frmMealList))
+                {
+                    frmMealList f = new();
+                    newfrm = f;
+                    f.Show();
+                }
                 if (newfrm != null)
                 {
                     newfrm.MdiParent = this;
@@ -116,6 +131,15 @@ namespace RecipeWinForms
         private void MenuRecipesList_Click(object? sender, EventArgs e)
         {
             OpenForm(typeof(frmList));
+        }
+
+        private void MenuDashboard_Click(object? sender, EventArgs e)
+        {
+            OpenForm(typeof(frmDashboard));
+        }
+        private void MenuMealsList_Click(object? sender, EventArgs e)
+        {
+            OpenForm(typeof(frmMealList));
         }
     }
 }

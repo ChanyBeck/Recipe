@@ -1,19 +1,19 @@
 create or alter procedure dbo.RecipeIngredientUpdate(
-    @RecipeIngredientId int = 0 output, 
-    @RecipeId int = 0,
-    @IngredientId int = 0, 
-    @measurementId int = 0, 
+    @RecipeIngredientId int output, 
+    @RecipeId int,
+    @IngredientId int, 
+    @measurementId int, 
     @Amount decimal(5,2),
-    @ingredientSequence int = 0,
+    @ingredientSequence int,
     @Message varchar(500) = ''  output
 )
 as 
 begin 
     declare @return int = 0
 
-    select @RecipeId = isnull(@RecipeId, 0)
+    select @RecipeIngredientId = isnull(@RecipeIngredientId, 0)
 
-    if @recipeid = 0
+    if @RecipeIngredientId = 0
     begin 
         insert RecipeIngredient(RecipeId, IngredientId, measurementId, Amount, ingredientSequence)
         values (@RecipeId, @IngredientId, @measurementId, @Amount, @ingredientSequence)

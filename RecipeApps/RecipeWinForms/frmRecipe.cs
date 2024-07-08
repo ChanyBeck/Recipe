@@ -66,8 +66,8 @@ namespace RecipeWinForms
             gridIngredients.DataSource = dtingredient;
             WindowsFormsUtility.AddComboBoxToGrid(gridIngredients, Recipe.GetList("MeasurementGet"), "MeasurementType", "Measurement");
             WindowsFormsUtility.AddComboBoxToGrid(gridIngredients, Recipe.GetList("IngredientGet"), "ingredientName", "Ingredient");
-            WindowsFormsUtility.AddDeleteButtonToGrid(gridIngredients, delete);
             WindowsFormsUtility.FormatGridForEdit(gridIngredients, "RecipeIngredient");
+            WindowsFormsUtility.AddDeleteButtonToGrid(gridIngredients, delete);
         }
 
         private void LoadRecipeDirection()

@@ -16,7 +16,7 @@ namespace RecipeWinForms
         public frmList()
         {
             InitializeComponent();
-            RecipeList("RecipeList");
+            RecipeList("RecipeListGet");
             btnNew.Click += BtnNew_Click;
             gridListRecipes.CellClick += GridListRecipes_CellClick;
         }

@@ -10,7 +10,7 @@ begin
 
 	select @RecipeIngredientId = isnull(@RecipeIngredientId,0)
 
-	select ri.RecipeIngredientId, ri.IngredientId, ri.measurementId, ri.Amount, ri.ingredientSequence
+	select ri.RecipeIngredientId, ri.IngredientId, ri.measurementId, ri.Amount, ri.ingredientSequence, ri.RecipeId
 	from RecipeIngredient ri
 	where ri.RecipeId = @RecipeId
     or ri.RecipeIngredientId  = @RecipeIngredientId 
