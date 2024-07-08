@@ -32,9 +32,9 @@ namespace RecipeWinForms
                     gRecipes.Rows[0].Selected = true;
                 }
             }
-            catch
+            catch (Exception ex)
             {
-                throw;
+                MessageBox.Show(ex.Message, Application.ProductName);
             }
             finally
             {

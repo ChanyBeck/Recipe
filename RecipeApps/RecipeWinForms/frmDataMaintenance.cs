@@ -8,6 +8,7 @@ namespace RecipeWinForms
         DataTable dtlist = new();
         TableTypeEnum currenttabletype = TableTypeEnum.Ingredient;
         string delete = "deletecol";
+        
         public frmDataMaintenance()
         {
             InitializeComponent();
@@ -18,17 +19,16 @@ namespace RecipeWinForms
             SetupRadioButtons();
         }
 
-
         private void BindData(TableTypeEnum tabletype)
         {
             currenttabletype = tabletype;
             dtlist = DataMaintenance.GetList(currenttabletype.ToString());
             gData.Columns.Clear();
             gData.DataSource = dtlist;
-            gData.Columns.Add(new DataGridViewButtonColumn() {Text = "X", HeaderText = "Delete", Name = delete, UseColumnTextForButtonValue = true});
+            WindowsFormsUtility.AddDeleteButtonToGrid(gData, delete);
             WindowsFormsUtility.FormatGridForEdit(gData, currenttabletype.ToString());
-
         }
+        
         private bool Save()
         {
             bool b = false;
@@ -49,6 +49,7 @@ namespace RecipeWinForms
             }
             return b;
         }
+
         private void Delete(int rowindex)
         {
             int id = WindowsFormsUtility.GetIdFromGrid(gData, rowindex, currenttabletype.ToString() + "id");
@@ -93,10 +94,12 @@ namespace RecipeWinForms
                 BindData((TableTypeEnum)((Control)sender).Tag);
             }
         }
+
         private void BtnSave_Click(object? sender, EventArgs e)
         {
             Save();
         }
+        
         private void FrmDataMaintenance_FormClosing(object? sender, FormClosingEventArgs e)
         {
             if (SQLUtility.TableHasChanges(dtlist) == true)

@@ -21,8 +21,10 @@ namespace RecipeWinForms
             menuCascade.Click += MenuCascade_Click;
             menuData.Click += MenuData_Click;
             menuCookbooksList.Click += MenuCookbooksList_Click;
+            menuRecipesList.Click += MenuRecipesList_Click;
 
         }
+
 
         public void OpenForm(Type frmtype, int pk = 0)
         {
@@ -55,6 +57,13 @@ namespace RecipeWinForms
                     newfrm = f;
                     f.ShowList();
                 }
+                else if (frmtype == typeof(frmList))
+                {
+                    frmList f = new();
+                    newfrm = f;
+                    f.Show();
+                }
+
                 if (newfrm != null)
                 {
                     newfrm.MdiParent = this;
@@ -104,6 +113,9 @@ namespace RecipeWinForms
         {
             OpenForm(typeof(frmCookbookList));
         }
-
+        private void MenuRecipesList_Click(object? sender, EventArgs e)
+        {
+            OpenForm(typeof(frmList));
+        }
     }
 }

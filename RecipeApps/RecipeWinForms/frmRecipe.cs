@@ -1,5 +1,6 @@
 ﻿
 using RecipeSystem;
+using System.Xml.Linq;
 
 namespace RecipeWinForms
 {
@@ -7,13 +8,19 @@ namespace RecipeWinForms
     {
         DataTable dtrecipe;
         DataTable dtingredient;
+        DataTable dtsteps;
         BindingSource bs = new();
+        string delete = "deletecol";
+        int recipeid = 0;
         public frmRecipe()
         {
             InitializeComponent();
             btnSave.Click += BtnSave_Click;
             btnDelete.Click += BtnDelete_Click;
             btnIngredientsSave.Click += BtnIngredientsSave_Click;
+            btnStepsSave.Click += BtnStepsSave_Click;
+            gridIngredients.CellContentClick += GridIngredients_CellContentClick;
+            gridSteps.CellContentClick += GridSteps_CellContentClick;
             foreach (Control c in tblMain.Controls)
             {
                 c.DataBindings.DefaultDataSourceUpdateMode = DataSourceUpdateMode.OnPropertyChanged;
@@ -21,8 +28,10 @@ namespace RecipeWinForms
             this.FormClosing += FrmRecipe_FormClosing;
         }
 
-        public void ShowForm(int recipeid)
+
+        public void ShowForm(int recipeidval)
         {
+            recipeid = recipeidval;
             this.Tag = recipeid;
             dtrecipe = Recipe.Load(recipeid);
             bs.DataSource = dtrecipe;
@@ -30,9 +39,9 @@ namespace RecipeWinForms
             {
                 dtrecipe.Rows.Add();
             }
-            DataTable dtUsers = Recipe.GetList("Users");
+            DataTable dtUsers = Recipe.GetList("UsersGet");
             WindowsFormsUtility.SetListBinding(lstUserName, dtUsers, "Users", dtrecipe);
-            DataTable dtCuisine = Recipe.GetList("Cuisine");
+            DataTable dtCuisine = Recipe.GetList("CuisineGet");
             WindowsFormsUtility.SetListBinding(lstCuisineType, dtCuisine, "Cuisine", dtrecipe);
             WindowsFormsUtility.SetControlBinding(txtCalories, bs);
             WindowsFormsUtility.SetControlBinding(lblDateArchived, bs);
@@ -42,60 +51,35 @@ namespace RecipeWinForms
             WindowsFormsUtility.SetControlBinding(txtRecipeName, bs);
             WindowsFormsUtility.SetControlBinding(lblRecipeStatus, bs);
             this.Text = GetRecipeDesc();
+
+            LoadRecipeDirection();
+
+            LoadRecipeIngredient();
+
             this.Show();
-            SearchForIngredients(recipeid);
-            SearchForSteps(recipeid);
         }
-        public void SearchForSteps(int recipeid)
-        {
-            try
-            {
-                this.Cursor = Cursors.WaitCursor;
-                DataTable dt = new();
-                gridSteps.DataSource = Direction.Load(recipeid);
-                WindowsFormsUtility.FormatGridForEdit(gridSteps, "recipeRecipeDirection");
-                if (gridSteps.Rows.Count > 0)
-                {
-                    gridSteps.Focus();
-                    gridSteps.Rows[0].Selected = true;
-                }
-            }
-            catch (Exception ex)
-            {
-                throw (ex);
-            }
-            finally
-            {
-                this.Cursor = Cursors.Default;
-            }
 
-        }
-        public void SearchForIngredients(int recipeid)
+        private void LoadRecipeIngredient()
         {
-            try
-            {
-                this.Cursor = Cursors.WaitCursor;
-                dtingredient = Ingredients.Load(recipeid);
-                gridIngredients.DataSource = dtingredient;
-                WindowsFormsUtility.AddComboBoxToGrid(gridIngredients, Recipe.GetList("Measurement"), "MeasurementType", "Measurement");
-                WindowsFormsUtility.AddComboBoxToGrid(gridIngredients, Recipe.GetList("Ingredient"), "ingredientName", "Ingredient");
-                WindowsFormsUtility.FormatGridForEdit(gridIngredients, "RecipeIngredient");
-                if (gridIngredients.Rows.Count > 0)
-                {
-                    gridIngredients.Focus();
-                    gridIngredients.Rows[0].Selected = true;
-                }
-            }
-            catch (Exception ex)
-            {
-                throw (ex);
-            }
-            finally
-            {
-                this.Cursor = Cursors.Default;
-            }
-
+            dtingredient = Ingredients.Load(recipeid);
+            gridIngredients.Columns.Clear();
+            gridIngredients.DataSource = dtingredient;
+            WindowsFormsUtility.AddComboBoxToGrid(gridIngredients, Recipe.GetList("MeasurementGet"), "MeasurementType", "Measurement");
+            WindowsFormsUtility.AddComboBoxToGrid(gridIngredients, Recipe.GetList("IngredientGet"), "ingredientName", "Ingredient");
+            WindowsFormsUtility.AddDeleteButtonToGrid(gridIngredients, delete);
+            WindowsFormsUtility.FormatGridForEdit(gridIngredients, "RecipeIngredient");
         }
+
+        private void LoadRecipeDirection()
+        {
+            dtsteps = Direction.Load(recipeid);
+            gridSteps.Columns.Clear();
+            gridSteps.DataSource = dtsteps;
+            WindowsFormsUtility.FormatGridForEdit(gridSteps, "RecipeDirection");
+            WindowsFormsUtility.AddDeleteButtonToGrid(gridSteps, delete);
+            WindowsFormsUtility.FormatGridForEdit(gridSteps, "RecipeDirection");
+        }
+
         private bool SaveRecipe()
         {
             bool b = false;
@@ -117,6 +101,69 @@ namespace RecipeWinForms
                 Application.UseWaitCursor = false;
             }
             return b;
+        }
+        private void SaveIng()
+        {
+            try
+            {
+                Ingredients.Save(dtingredient, recipeid);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, Application.ProductName);
+            }
+        }
+
+        private void SaveSteps()
+        {
+            try
+            {
+                Direction.Save(dtsteps, recipeid);
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, Application.ProductName);
+            }
+        }
+        private void DeleteIng(int rowIndex)
+        {
+            int id = WindowsFormsUtility.GetIdFromGrid(gridIngredients, rowIndex, "RecipeIngredientId");
+            if (id > 0)
+            {
+                try
+                {
+                    Ingredients.Delete(id);
+                    LoadRecipeIngredient();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, Application.ProductName);
+                }
+            }
+            else if (id < gridIngredients.Rows.Count)
+            {
+                gridIngredients.Rows.RemoveAt(rowIndex);
+            }
+        }
+        private void DeleteDirection(int rowIndex)
+        {
+            int id = WindowsFormsUtility.GetIdFromGrid(gridSteps, rowIndex, "RecipeDirectionId");
+            if (id > 0)
+            {
+                try
+                {
+                    Direction.Delete(id);
+                    LoadRecipeDirection();
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message, Application.ProductName);
+                }
+            }
+            else if (id < gridSteps.Rows.Count)
+            {
+                gridSteps.Rows.RemoveAt(rowIndex);
+            }
         }
 
         private void Delete()
@@ -147,28 +194,6 @@ namespace RecipeWinForms
                 Application.UseWaitCursor = false;
             }
         }
-        private bool SaveIngredient()
-        {
-            bool b = false;
-            Application.UseWaitCursor = true;
-            try
-            {
-                Ingredients.Save(dtingredient);
-                b = true;
-                this.Tag = SQLUtility.GetValueFromFirstRowAsInt(dtingredient, "RecipeIngredientId");
-                this.Text = GetRecipeDesc();
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(SQLUtility.ParseConstraintMessage(ex.Message));
-            }
-            finally
-            {
-                Application.UseWaitCursor = false;
-            }
-            return b;
-        }
-
 
         private string GetRecipeDesc()
         {
@@ -192,7 +217,12 @@ namespace RecipeWinForms
 
         private void BtnIngredientsSave_Click(object? sender, EventArgs e)
         {
-            SaveIngredient();
+            SaveIng();
+        }
+
+        private void BtnStepsSave_Click(object? sender, EventArgs e)
+        {
+            SaveSteps();
         }
 
 
@@ -218,6 +248,16 @@ namespace RecipeWinForms
                         break;
                 }
             }
+        }
+
+        private void GridIngredients_CellContentClick(object? sender, DataGridViewCellEventArgs e)
+        {
+            DeleteIng(e.RowIndex);
+        }
+
+        private void GridSteps_CellContentClick(object? sender, DataGridViewCellEventArgs e)
+        {
+            DeleteDirection(e.RowIndex);
         }
     }
 }

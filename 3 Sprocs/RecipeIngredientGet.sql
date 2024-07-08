@@ -12,7 +12,9 @@ begin
 
 	select ri.RecipeIngredientId, ri.IngredientId, ri.measurementId, ri.Amount, ri.ingredientSequence
 	from RecipeIngredient ri
-	where RecipeId = @RecipeId
+	where ri.RecipeId = @RecipeId
+    or ri.RecipeIngredientId  = @RecipeIngredientId 
+    or @All = 1
     order by ri.ingredientSequence
 
 	return @return
