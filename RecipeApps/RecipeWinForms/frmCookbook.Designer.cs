@@ -31,6 +31,8 @@
             tblMain = new TableLayoutPanel();
             btnSave = new Button();
             btnDelete = new Button();
+            label1 = new Label();
+            label2 = new Label();
             tblMain.SuspendLayout();
             SuspendLayout();
             // 
@@ -41,6 +43,8 @@
             tblMain.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
             tblMain.Controls.Add(btnSave, 0, 0);
             tblMain.Controls.Add(btnDelete, 1, 0);
+            tblMain.Controls.Add(label1, 0, 1);
+            tblMain.Controls.Add(label2, 1, 1);
             tblMain.Dock = DockStyle.Fill;
             tblMain.Location = new Point(0, 0);
             tblMain.Name = "tblMain";
@@ -75,6 +79,24 @@
             btnDelete.Text = "Delete";
             btnDelete.UseVisualStyleBackColor = true;
             // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(3, 175);
+            label1.Name = "label1";
+            label1.Size = new Size(38, 15);
+            label1.TabIndex = 2;
+            label1.Text = "label1";
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Location = new Point(403, 175);
+            label2.Name = "label2";
+            label2.Size = new Size(38, 15);
+            label2.TabIndex = 3;
+            label2.Text = "label2";
+            // 
             // frmCookbook
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -93,5 +115,7 @@
         private TableLayoutPanel tblMain;
         private Button btnSave;
         private Button btnDelete;
+        private Label label1;
+        private Label label2;
     }
 }
