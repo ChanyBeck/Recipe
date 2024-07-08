@@ -1,5 +1,6 @@
 create or alter procedure dbo.RecipeDirectionGet(
     @RecipeDirectionId int = 0, 
+	@RecipeId int = 0,
     @All bit = 0, 
     @Message varchar(500) = ''  output
 )  
@@ -12,6 +13,7 @@ begin
 	select d.RecipeDirectionId, d.Direction, d.DirectionSequence
 	from RecipeDirection d
 	where d.RecipeDirectionId = @RecipeDirectionId
+	or d.RecipeId = @recipeId
 	or @All = 1
 	order by d.DirectionSequence
 

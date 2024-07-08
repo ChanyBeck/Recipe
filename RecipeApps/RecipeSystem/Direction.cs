@@ -14,17 +14,27 @@ namespace RecipeSystem
         {
             DataTable dt = new();
 
-            SqlCommand cmd = SQLUtility.GetSQLCommand("RecipeRecipeDirectionGet");
+            SqlCommand cmd = SQLUtility.GetSQLCommand("RecipeDirectionGet");
 
             cmd.Parameters["@RecipeId"].Value = id;
 
             return SQLUtility.GetDataTable(cmd);
         }
-        public static void Save(DataTable dtrecipe)
+        public static void Save(DataTable dt, int id)
         {
-            DataRow dr = dtrecipe.Rows[0];
-
-            SQLUtility.SaveDataRow(dr, "RecipeRecipeDirectionUpdate");
+            foreach(DataRow row in dt.Select("", "", DataViewRowState.Added))
+            {
+                row["RecipeId"] = id;
+            }
+            SQLUtility.SaveDataTable(dt, "RecipeDirectionUpdate");
         }
+
+        public static void Delete(int id)
+        {
+            SqlCommand cmd = SQLUtility.GetSQLCommand("RecipeDirectionDelete");
+            cmd.Parameters["@RecipeDirectionId"].Value = id;
+            SQLUtility.ExecuteSQL(cmd);
+        }
+
     }
 }

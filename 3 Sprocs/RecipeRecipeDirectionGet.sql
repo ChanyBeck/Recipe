@@ -12,7 +12,8 @@ begin
 
 	select d.RecipeDirectionId, d.Direction, d.DirectionSequence
 	from RecipeDirection d
-	where RecipeId = @RecipeId
+	where d.RecipeId = @RecipeId
+    or @All = 1
     order by DirectionSequence
 
 	return @return

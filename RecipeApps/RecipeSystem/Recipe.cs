@@ -35,11 +35,11 @@ namespace RecipeSystem
         }
 
         
-        public static DataTable GetList(string tablename)
+        public static DataTable GetList(string sprocname)
         {
             DataTable dt = new();
 
-            SqlCommand cmd = SQLUtility.GetSQLCommand(tablename + "get");
+            SqlCommand cmd = SQLUtility.GetSQLCommand(sprocname);
 
             cmd.Parameters["@All"].Value = 1;
 
