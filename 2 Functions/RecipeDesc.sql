@@ -6,13 +6,13 @@ begin
     declare @value varchar (120)
 
 
-    select @value = concat(r.RecipeName, ' (', c.CuisineType, ' ) has ', case when max(ri.IngrediantSequence) is null then 0 else max(ri.IngrediantSequence) end, ' ingrediants and ', case when max(rd.DirectionSequence) is null then 0 else max(rd.DirectionSequence) end, ' steps.') 
+    select @value = concat(r.RecipeName, ' (', c.CuisineType, ' ) has ', case when max(ri.IngredientSequence) is null then 0 else max(ri.IngredientSequence) end, ' ingrediants and ', case when max(rd.DirectionSequence) is null then 0 else max(rd.DirectionSequence) end, ' steps.') 
     from Recipe r 
     left join Cuisine c 
     on c.CuisineId = r.CuisineId 
     left join RecipeDirection rd 
     on rd.RecipeId = r.RecipeId
-    left join RecipeIngrediant ri 
+    left join RecipeIngredient ri 
     on ri.RecipeId = r.RecipeId
     where r.RecipeId = @RecipeId
     group by r.RecipeName, c.CuisineType

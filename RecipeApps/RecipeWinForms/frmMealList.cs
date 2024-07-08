@@ -1,0 +1,28 @@
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace RecipeWinForms
+{
+    public partial class frmMealList : Form
+    {
+        public frmMealList()
+        {
+            InitializeComponent();
+            ShowData();
+        }
+
+        private void ShowData()
+        {
+            DataTable dt = DataMaintenance.GetList("MealList");
+            gridMealList.DataSource = dt;
+            WindowsFormsUtility.FormatGridForSearch(gridMealList, "MealList");
+        }
+    }
+}

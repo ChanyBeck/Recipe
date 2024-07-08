@@ -1,4 +1,6 @@
-create or alter function dbo.MealCalories(@MealId int)
+create or alter function dbo.MealCalories(
+    @MealId int
+)
 returns int
 
 as 
