@@ -18,7 +18,7 @@ begin
     if @recipeid = 0
     begin 
         insert Recipe(UsersId, CuisineId, RecipeName, Calories, DateDrafted, DatePublished, DateArchived)
-        values (@UsersId, @CuisineId, @RecipeName, @Calories, @DateDrafted, @DatePublished, @DateArchived)
+        values (@UsersId, @CuisineId, @RecipeName, @Calories, CURRENT_TIMESTAMP, @DatePublished, @DateArchived)
     end 
     else 
     begin 
