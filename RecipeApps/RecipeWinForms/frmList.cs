@@ -19,8 +19,13 @@ namespace RecipeWinForms
             RecipeList("RecipeListGet");
             btnNew.Click += BtnNew_Click;
             gridListRecipes.CellClick += GridListRecipes_CellClick;
+            this.Activated += FrmList_Activated;
         }
 
+        private void FrmList_Activated(object? sender, EventArgs e)
+        {
+            RecipeList("RecipeListGet");
+        }
 
         public void RecipeList(string sprocname)
         {

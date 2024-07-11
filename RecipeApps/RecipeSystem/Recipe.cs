@@ -34,8 +34,8 @@ namespace RecipeSystem
             return SQLUtility.GetDataTable(cmd);
         }
 
-        
-        public static DataTable GetList(string sprocname)
+
+        public static DataTable GetList(string sprocname, bool includeblank = false)
         {
             DataTable dt = new();
 
@@ -43,7 +43,21 @@ namespace RecipeSystem
 
             cmd.Parameters["@All"].Value = 1;
 
+            if (includeblank == true)
+            {
+                SQLUtility.SetParameterValue(cmd, "@includeblank", 1);
+            }
+
             return SQLUtility.GetDataTable(cmd);
+        }
+
+        public static void CloneRecipe(int recipeid)
+        {
+            SqlCommand cmd = SQLUtility.GetSQLCommand("RecipeClone");
+
+            SQLUtility.SetParameterValue(cmd, "@BaseRecipeId", recipeid);
+
+            SQLUtility.ExecuteSQL(cmd);
         }
 
         public static void Save(DataTable dtrecipe)

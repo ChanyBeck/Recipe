@@ -26,9 +26,15 @@ namespace RecipeWinForms
             menuRecipesList.Click += MenuRecipesList_Click;
             menuDashboard.Click += MenuDashboard_Click;
             menuMealsList.Click += MenuMealsList_Click;
-            OpenForm(typeof(frmDashboard));
+            menuNewCookbook.Click += MenuNewCookbook_Click;
+            menuCloneARecipe.Click += MenuCloneARecipe_Click;
+            this.Shown += FrmMain_Shown;
         }
 
+        private void FrmMain_Shown(object? sender, EventArgs e)
+        {
+            OpenForm(typeof(frmDashboard));
+        }
 
         public void OpenForm(Type frmtype, int pk = 0)
         {
@@ -41,43 +47,48 @@ namespace RecipeWinForms
                 {
                     frmRecipe f = new();
                     newfrm = f;
-                    f.ShowForm(pk);
+                    f.LoadForm(pk);
                 }
                 else if (frmtype == typeof(frmSearch))
                 {
                     frmSearch f = new();
                     newfrm = f;
-                    f.Show();
                 }
                 else if (frmtype == typeof(frmDataMaintenance))
                 {
                     frmDataMaintenance f = new();
                     newfrm = f;
-                    f.Show();
                 }
                 else if (frmtype == typeof(frmCookbookList))
                 {
                     frmCookbookList f = new();
                     newfrm = f;
-                    f.ShowList();
                 }
                 else if (frmtype == typeof(frmList))
                 {
                     frmList f = new();
                     newfrm = f;
-                    f.Show();
                 }
                 else if (frmtype == typeof(frmDashboard))
                 {
                     frmDashboard f = new();
                     newfrm = f;
-                    f.Show();
                 }
                 else if (frmtype == typeof(frmMealList))
                 {
                     frmMealList f = new();
                     newfrm = f;
-                    f.Show();
+                }
+                else if (frmtype == typeof(frmCookbook))
+                {
+                    frmCookbook f = new();
+                    newfrm = f;
+                    f.LoadForm(pk);
+                }
+                else if (frmtype == typeof(frmCloneRecipe))
+                {
+                    frmCloneRecipe f = new();
+                    newfrm = f;
                 }
                 if (newfrm != null)
                 {
@@ -85,6 +96,7 @@ namespace RecipeWinForms
                     newfrm.WindowState = FormWindowState.Maximized;
                     newfrm.FormClosed += Frm_FormClosed;
                     newfrm.TextChanged += Newfrm_TextChanged;
+                    newfrm.Show();
                 }
                 WindowsFormsUtility.SetupNav(tsMain);
             }
@@ -141,5 +153,16 @@ namespace RecipeWinForms
         {
             OpenForm(typeof(frmMealList));
         }
+
+        private void MenuNewCookbook_Click(object? sender, EventArgs e)
+        {
+            OpenForm(typeof(frmCookbook));
+        }
+
+        private void MenuCloneARecipe_Click(object? sender, EventArgs e)
+        {
+            OpenForm(typeof(frmCloneRecipe));
+        }
+
     }
 }
