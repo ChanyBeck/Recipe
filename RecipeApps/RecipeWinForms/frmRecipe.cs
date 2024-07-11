@@ -29,7 +29,7 @@ namespace RecipeWinForms
         }
 
 
-        public void ShowForm(int recipeidval)
+        public void LoadForm(int recipeidval)
         {
             recipeid = recipeidval;
             this.Tag = recipeid;
@@ -56,7 +56,7 @@ namespace RecipeWinForms
 
             LoadRecipeIngredient();
 
-            this.Show();
+            SetEnableButtons();
         }
 
         private void LoadRecipeIngredient()
@@ -88,8 +88,11 @@ namespace RecipeWinForms
             {
                 Recipe.Save(dtrecipe);
                 b = true;
-                this.Tag = SQLUtility.GetValueFromFirstRowAsInt(dtrecipe, "RecipeId");
+                recipeid = SQLUtility.GetValueFromFirstRowAsInt(dtrecipe, "RecipeId");
+                this.Tag = recipeid;
+                SetEnableButtons();
                 this.Text = GetRecipeDesc();
+                bs.DataSource = dtrecipe;
             }
             catch (Exception ex)
             {
@@ -195,6 +198,13 @@ namespace RecipeWinForms
             }
         }
 
+        private void SetEnableButtons()
+        {
+            bool b = recipeid == 0? false : true;
+            btnDelete.Enabled = b;
+            btnIngredientsSave.Enabled = b;
+            btnStepsSave.Enabled = b;
+        }
         private string GetRecipeDesc()
         {
             string value = "New Recipe";

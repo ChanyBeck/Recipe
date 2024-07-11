@@ -12,6 +12,7 @@ begin
     on i.RecipeId = r.RecipeId
     where @All = 1 
     group by r.RecipeName, r.RecipeStatus, u.LastName, u.FirstName, r.Calories, r.RecipeId
+    order by r.RecipeId desc 
 
     return @return
 end

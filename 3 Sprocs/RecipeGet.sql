@@ -2,6 +2,7 @@ create or alter procedure dbo.RecipeGet(
 @RecipeId int = 0, 
 @All bit = 0, 
 @RecipeName varchar(50) = '', 
+@IncludeBlank bit = 0,
 @message varchar (1000) = '' output)  
 
 as 
@@ -9,7 +10,7 @@ begin
     declare @return int = 0, @count int = 0
     declare @t table(recipeid int) 
 
-    select @RecipeName = nullif(@RecipeName, '')
+    select @RecipeName = nullif(@RecipeName, ''), @IncludeBlank = isnull(@IncludeBlank, 0)
 
     insert @t(r.recipeid)
     select r.RecipeId
@@ -21,9 +22,9 @@ begin
     select @count = count(*)
     from @t
 
-    if @count > 7
+    if @count > 20
     begin 
-        select @message = concat ('Searching for ', @count, ' Recipes, max search is 7') 
+        select @message = concat ('Searching for ', @count, ' Recipes, max search is 20') 
         select @return = 1
         goto finished
     end 
@@ -32,10 +33,15 @@ begin
     from @t t 
     join Recipe r 
     on r.RecipeId = t.recipeid
+    union select 0, 0, 0, 0, '', '', '', '', '', '', '', ''
+    where @IncludeBlank = 1
+    
 
     finished:
     return @return
 end
 go 
 
---exec RecipeGet @ALL = 1
+--exec RecipeGet @includeblank = 1,  @ALL = 1
+
+--select * from Recipe
