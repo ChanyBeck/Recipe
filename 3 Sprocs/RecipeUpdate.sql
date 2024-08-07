@@ -19,6 +19,8 @@ begin
     begin 
         insert Recipe(UsersId, CuisineId, RecipeName, Calories, DateDrafted, DatePublished, DateArchived)
         values (@UsersId, @CuisineId, @RecipeName, @Calories, CURRENT_TIMESTAMP, @DatePublished, @DateArchived)
+
+        select @Recipeid = SCOPE_IDENTITY();
     end 
     else 
     begin 
@@ -28,7 +30,7 @@ begin
         CuisineId = @CuisineId, 
         RecipeName = @RecipeName, 
         Calories = @Calories, 
-        DateDrafted = @DateDrafted, 
+        DateDrafted = @DateDrafted,
         DatePublished = @DatePublished, 
         DateArchived = @DateArchived
         where RecipeId = @recipeid

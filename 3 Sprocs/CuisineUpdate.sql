@@ -13,6 +13,8 @@ begin
     begin 
         insert Cuisine(CuisineType)
         values (@CuisineType)
+
+        select @CuisineId = SCOPE_IDENTITY();
     end 
     else 
     begin 

@@ -32,7 +32,9 @@ namespace RecipeSystem
         public static void Delete(int id)
         {
             SqlCommand cmd = SQLUtility.GetSQLCommand("RecipeDirectionDelete");
+
             cmd.Parameters["@RecipeDirectionId"].Value = id;
+            
             SQLUtility.ExecuteSQL(cmd);
         }
 

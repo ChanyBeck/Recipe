@@ -18,7 +18,8 @@ namespace RecipeWinForms
             InitializeComponent();
             RecipeList("RecipeListGet");
             btnNew.Click += BtnNew_Click;
-            gridListRecipes.CellClick += GridListRecipes_CellClick;
+            gridListRecipes.CellDoubleClick += GridListRecipes_DoubleClick;
+            gridListRecipes.KeyDown += GridListRecipes_KeyDown;
             this.Activated += FrmList_Activated;
         }
 
@@ -63,11 +64,20 @@ namespace RecipeWinForms
                 ((frmMain)this.MdiParent).OpenForm(typeof(frmRecipe), id);
             }
         }
+        private void GridListRecipes_KeyDown(object? sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter && gridListRecipes.SelectedRows.Count > 0)
+            {
+                ShowRecipeForm(gridListRecipes.SelectedRows[0].Index);
+                e.SuppressKeyPress = true;
+            }
+        }
 
-        private void GridListRecipes_CellClick(object? sender, DataGridViewCellEventArgs e)
+        private void GridListRecipes_DoubleClick(object? sender, DataGridViewCellEventArgs e)
         {
             ShowRecipeForm(e.RowIndex);
         }
+
 
         private void BtnNew_Click(object? sender, EventArgs e)
         {
