@@ -26,8 +26,8 @@ namespace RecipeWinForms
                 c.DataBindings.DefaultDataSourceUpdateMode = DataSourceUpdateMode.OnPropertyChanged;
             }
             this.FormClosing += FrmRecipe_FormClosing;
+            this.Shown += FrmRecipe_Shown;
         }
-
 
         public void LoadForm(int recipeidval)
         {
@@ -66,8 +66,8 @@ namespace RecipeWinForms
             gridIngredients.DataSource = dtingredient;
             WindowsFormsUtility.AddComboBoxToGrid(gridIngredients, Recipe.GetList("MeasurementGet"), "MeasurementType", "Measurement");
             WindowsFormsUtility.AddComboBoxToGrid(gridIngredients, Recipe.GetList("IngredientGet"), "ingredientName", "Ingredient");
-            WindowsFormsUtility.FormatGridForEdit(gridIngredients, "RecipeIngredient");
             WindowsFormsUtility.AddDeleteButtonToGrid(gridIngredients, delete);
+            WindowsFormsUtility.FormatGridForEdit(gridIngredients, "RecipeIngredient");
         }
 
         private void LoadRecipeDirection()
@@ -75,7 +75,6 @@ namespace RecipeWinForms
             dtsteps = Direction.Load(recipeid);
             gridSteps.Columns.Clear();
             gridSteps.DataSource = dtsteps;
-            WindowsFormsUtility.FormatGridForEdit(gridSteps, "RecipeDirection");
             WindowsFormsUtility.AddDeleteButtonToGrid(gridSteps, delete);
             WindowsFormsUtility.FormatGridForEdit(gridSteps, "RecipeDirection");
         }
@@ -92,6 +91,7 @@ namespace RecipeWinForms
                 this.Tag = recipeid;
                 SetEnableButtons();
                 this.Text = GetRecipeDesc();
+                dtrecipe = Recipe.Load(recipeid);
                 bs.DataSource = dtrecipe;
             }
             catch (Exception ex)
@@ -177,7 +177,7 @@ namespace RecipeWinForms
                 MessageBox.Show(alloweddelete, Application.ProductName);
                 return;
             }
-            var response = MessageBox.Show("Are you sure you wan to delete this Recipe?", Application.ProductName, MessageBoxButtons.YesNo);
+            var response = MessageBox.Show("Are you sure you want to delete this Recipe?", Application.ProductName, MessageBoxButtons.YesNo);
             if (response == DialogResult.No)
             {
                 return;
@@ -204,6 +204,7 @@ namespace RecipeWinForms
             btnDelete.Enabled = b;
             btnIngredientsSave.Enabled = b;
             btnStepsSave.Enabled = b;
+            btnChangeStatus.Enabled = b;
         }
         private string GetRecipeDesc()
         {
@@ -214,6 +215,11 @@ namespace RecipeWinForms
                 value = SQLUtility.GetValueFromFirstRowAsString(dtrecipe, "RecipeName");
             }
             return value;
+        }
+
+        private void FrmRecipe_Shown(object? sender, EventArgs e)
+        {
+            WindowsFormsUtility.AddDeleteButtonToGrid(gridIngredients, delete);
         }
         private void BtnDelete_Click(object? sender, EventArgs e)
         {

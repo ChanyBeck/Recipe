@@ -19,6 +19,7 @@ begin
         values (@RecipeId, @IngredientId, @measurementId, @Amount, @ingredientSequence)
             
         select @Recipeid = SCOPE_IDENTITY();
+        
     end 
     else 
     begin 

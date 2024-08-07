@@ -1,4 +1,5 @@
-﻿using System;
+﻿using RecipeSystem;
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -17,8 +18,14 @@ namespace RecipeWinForms
         public frmCookbookList()
         {
             InitializeComponent();
-            gridCookbook.CellClick += GridCookbook_CellClick;
+            gridCookbook.CellDoubleClick += GridCookbook_CellDoubleClick;
+            gridCookbook.KeyDown += GridCookbook_KeyDown;
             btnNewCookbook.Click += BtnNewCookbook_Click;
+            this.Activated += FrmCookbookList_Activated;
+        }
+
+        private void FrmCookbookList_Activated(object? sender, EventArgs e)
+        {
             GetList();
         }
 
@@ -40,7 +47,16 @@ namespace RecipeWinForms
                 ((frmMain)this.MdiParent).OpenForm(typeof(frmCookbook), id);
             }
         }
-        private void GridCookbook_CellClick(object? sender, DataGridViewCellEventArgs e)
+        private void GridCookbook_KeyDown(object? sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter && gridCookbook.SelectedRows.Count > 0)
+            {
+                ShowCookbookForm(gridCookbook.SelectedRows[0].Index);
+                e.SuppressKeyPress = true;
+            }
+        }
+
+        private void GridCookbook_CellDoubleClick(object? sender, DataGridViewCellEventArgs e)
         {
             ShowCookbookForm(e.RowIndex);
         }

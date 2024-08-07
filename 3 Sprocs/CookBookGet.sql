@@ -5,11 +5,13 @@ create or alter procedure dbo.CookbookGet(
 )  
 as 
 begin 
-    declare @return int = 0
+    declare @return int = 0, @Isactive bit
 
-	select @All = isnull(@All,0), @CookBookId = isnull(@CookBookId,0)
+	select @All = isnull(@All,0), @CookBookId = isnull(@CookBookId,0), @Isactive = isnull(@Isactive, 0)
 
-	select b.CookbookId, b.Title, b.UsersId, b.Price, b.BookCreated, b.IsActive
+	select @Isactive = IsActive from CookBook where CookBookId = @CookbookId
+
+	select b.CookbookId, b.Title, b.UsersId, b.Price, b.BookCreated, b.Isactive
 	from CookBook b 
 	where b.CookBookId = @CookBookId
 	or @All = 1

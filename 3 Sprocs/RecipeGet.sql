@@ -18,6 +18,7 @@ begin
     where r.recipeid = @RecipeId
     or @All = 1 
     or r.RecipeName like '%' + @RecipeName + '%'
+    order by r.recipestatus desc
 
     select @count = count(*)
     from @t

@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.SqlClient;
+﻿using System.Data.SqlClient;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace RecipeSystem
 {
@@ -41,7 +36,9 @@ namespace RecipeSystem
         public static void Delete(int id)
         {
             SqlCommand cmd = SQLUtility.GetSQLCommand("RecipeIngredientDelete");
+
             cmd.Parameters["@RecipeIngredientId"].Value = id;
+
             SQLUtility.ExecuteSQL(cmd);
         }
     }
