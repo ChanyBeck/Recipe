@@ -42,7 +42,16 @@ namespace RecipeSystem
            SQLUtility.SaveDataTable(dtrecipe, "RecipeCookbookUpdate"); 
         }
 
-        public static void Delete() { }
+        public static void Delete(DataTable dtcookbook) 
+        {
+            int id = (int)dtcookbook.Rows[0]["CookbookId"];
+
+            SqlCommand cmd = SQLUtility.GetSQLCommand("CookbookDelete");
+
+            SQLUtility.SetParameterValue(cmd, "@CookbookId", id);
+
+            SQLUtility.ExecuteSQL(cmd);
+        }
 
         public static void DeleteRecipe(int id)
         {

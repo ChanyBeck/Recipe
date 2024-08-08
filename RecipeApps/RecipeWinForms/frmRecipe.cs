@@ -15,6 +15,7 @@ namespace RecipeWinForms
         public frmRecipe()
         {
             InitializeComponent();
+            btnChangeStatus.Click += BtnChangeStatus_Click;
             btnSave.Click += BtnSave_Click;
             btnDelete.Click += BtnDelete_Click;
             btnIngredientsSave.Click += BtnIngredientsSave_Click;
@@ -27,6 +28,14 @@ namespace RecipeWinForms
             }
             this.FormClosing += FrmRecipe_FormClosing;
             this.Shown += FrmRecipe_Shown;
+        }
+
+        private void BtnChangeStatus_Click(object? sender, EventArgs e)
+        {
+            if (this.MdiParent != null && this.MdiParent is frmMain)
+            {
+                ((frmMain)this.MdiParent).OpenForm(typeof(frmChangeStatus), recipeid);
+            }
         }
 
         public void LoadForm(int recipeidval)
@@ -50,7 +59,7 @@ namespace RecipeWinForms
             //WindowsFormsUtility.SetControlBinding(lblPicture, bs);
             WindowsFormsUtility.SetControlBinding(txtRecipeName, bs);
             WindowsFormsUtility.SetControlBinding(lblRecipeStatus, bs);
-            this.Text = GetRecipeDesc();
+            this.Text = Recipe.GetRecipeDesc(dtrecipe);
 
             LoadRecipeDirection();
 
@@ -90,7 +99,7 @@ namespace RecipeWinForms
                 recipeid = SQLUtility.GetValueFromFirstRowAsInt(dtrecipe, "RecipeId");
                 this.Tag = recipeid;
                 SetEnableButtons();
-                this.Text = GetRecipeDesc();
+                this.Text = Recipe.GetRecipeDesc(dtrecipe);
                 dtrecipe = Recipe.Load(recipeid);
                 bs.DataSource = dtrecipe;
             }
@@ -205,16 +214,6 @@ namespace RecipeWinForms
             btnIngredientsSave.Enabled = b;
             btnStepsSave.Enabled = b;
             btnChangeStatus.Enabled = b;
-        }
-        private string GetRecipeDesc()
-        {
-            string value = "New Recipe";
-            int pk = SQLUtility.GetValueFromFirstRowAsInt(dtrecipe, "RecipeId");
-            if (pk > 0)
-            {
-                value = SQLUtility.GetValueFromFirstRowAsString(dtrecipe, "RecipeName");
-            }
-            return value;
         }
 
         private void FrmRecipe_Shown(object? sender, EventArgs e)

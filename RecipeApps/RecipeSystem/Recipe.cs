@@ -78,5 +78,16 @@ namespace RecipeSystem
             
             SQLUtility.ExecuteSQL(cmd);
         }
+        public static string GetRecipeDesc(DataTable dtrecipe)
+        {
+            string value = "New Recipe";
+            int pk = SQLUtility.GetValueFromFirstRowAsInt(dtrecipe, "RecipeId");
+            if (pk > 0)
+            {
+                value = SQLUtility.GetValueFromFirstRowAsString(dtrecipe, "RecipeName");
+            }
+            return value;
+        }
+
     }
 }

@@ -26,6 +26,7 @@ namespace RecipeWinForms
             btnDelete.Click += BtnDelete_Click;
             gridRecipe.CellContentClick += GridRecipe_CellContentClick;
             this.Shown += FrmCookbook_Shown;
+            this.FormClosing += FrmCookbook_FormClosing;
         }
 
 
@@ -119,12 +120,6 @@ namespace RecipeWinForms
 
         private void Delete()
         {
-            string alloweddelete = SQLUtility.GetValueFromFirstRowAsString(dtrecipe, "IsDeleteAllowed");
-            if (alloweddelete != "")
-            {
-                MessageBox.Show(alloweddelete, Application.ProductName);
-                return;
-            }
             var response = MessageBox.Show("Are you sure you want to delete this Recipe?", Application.ProductName, MessageBoxButtons.YesNo);
             if (response == DialogResult.No)
             {
@@ -133,7 +128,7 @@ namespace RecipeWinForms
             Application.UseWaitCursor = true;
             try
             {
-                Recipe.Delete(dtrecipe);
+                Cookbook.Delete(dtCookbook);
                 this.Close();
             }
             catch (Exception ex)
@@ -174,6 +169,30 @@ namespace RecipeWinForms
         private void FrmCookbook_Shown(object? sender, EventArgs e)
         {
             WindowsFormsUtility.AddDeleteButtonToGrid(gridRecipe, delete);
+        }
+
+        private void FrmCookbook_FormClosing(object? sender, FormClosingEventArgs e)
+        {
+            bs.EndEdit();
+            if (SQLUtility.TableHasChanges(dtCookbook) == true)
+            {
+                var res = MessageBox.Show($"Do you want to save changes to {this.Text} before closing?", Application.ProductName, MessageBoxButtons.YesNoCancel);
+                switch (res)
+                {
+                    case DialogResult.Yes:
+                        bool b = Save();
+                        if (b == false)
+                        {
+                            e.Cancel = true;
+                            this.Activate();
+                        }
+                        break;
+                    case DialogResult.Cancel:
+                        e.Cancel = true;
+                        this.Activate();
+                        break;
+                }
+            }
         }
     }
 }
