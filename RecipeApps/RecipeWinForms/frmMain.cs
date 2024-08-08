@@ -90,6 +90,12 @@ namespace RecipeWinForms
                     frmCloneRecipe f = new();
                     newfrm = f;
                 }
+                else if(frmtype == typeof(frmChangeStatus))
+                {
+                    frmChangeStatus f = new();
+                    newfrm = f;
+                    f.LoadForm(pk); 
+                }
                 if (newfrm != null)
                 {
                     newfrm.MdiParent = this;
