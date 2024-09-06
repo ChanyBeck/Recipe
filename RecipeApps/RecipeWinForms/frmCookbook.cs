@@ -107,6 +107,7 @@ namespace RecipeWinForms
                     Cookbook.DeleteRecipe(id);
                     LoadRecipe(cookbookid);
                     WindowsFormsUtility.AddDeleteButtonToGrid(gridRecipe, delete);
+                    WindowsFormsUtility.FormatGridForEdit(gridRecipe, "Recipe");
                 }
                 catch (Exception ex)
                 {

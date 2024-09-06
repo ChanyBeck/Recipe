@@ -9,4 +9,4 @@ declare @cookbookid int
 
     exec CookBookListGet @all = 1
 
-    exec CookBookListGet @cookbookid = @cookbookid
+

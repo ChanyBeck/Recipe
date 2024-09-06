@@ -1,3 +1,5 @@
+use HeartyHearthDB
+go 
 drop role if exists approle 
 go 
 create role approle 
