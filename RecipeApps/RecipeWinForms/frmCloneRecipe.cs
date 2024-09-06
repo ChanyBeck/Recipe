@@ -22,7 +22,7 @@
             {
                 Recipe.CloneRecipe(recipeid);
                 DataTable dt = SQLUtility.GetDataTable(SQLUtility.GetSQLCommand("RecipeGet"));
-                recipeid = (int)dt.Rows[0]["RecipeId"];
+                //recipeid = (int)dt.Rows[0]["RecipeId"];
                 if (this.MdiParent != null && this.MdiParent is frmMain)
                 {
                     ((frmMain)this.MdiParent).OpenForm(typeof(frmRecipe), recipeid);
