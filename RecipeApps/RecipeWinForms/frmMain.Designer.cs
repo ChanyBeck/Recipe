@@ -29,25 +29,25 @@
         private void InitializeComponent()
         {
             menuMain = new MenuStrip();
+            menuFile = new ToolStripMenuItem();
+            menuDashboard = new ToolStripMenuItem();
             menuRecipe = new ToolStripMenuItem();
             menuSearch = new ToolStripMenuItem();
             menuNewRecipe = new ToolStripMenuItem();
-            menuCascade = new ToolStripMenuItem();
-            menuTile = new ToolStripMenuItem();
-            cascadeToolStripMenuItem = new ToolStripMenuItem();
-            menuDataMaintenance = new ToolStripMenuItem();
-            menuData = new ToolStripMenuItem();
-            tsMain = new ToolStrip();
-            menuFile = new ToolStripMenuItem();
-            menuDashboard = new ToolStripMenuItem();
-            menuMeals = new ToolStripMenuItem();
-            menuMealsList = new ToolStripMenuItem();
             menuRecipesList = new ToolStripMenuItem();
             menuCloneARecipe = new ToolStripMenuItem();
+            menuMeals = new ToolStripMenuItem();
+            menuMealsList = new ToolStripMenuItem();
             menuCookbooks = new ToolStripMenuItem();
             menuCookbooksList = new ToolStripMenuItem();
             menuNewCookbook = new ToolStripMenuItem();
             menuAutoCreate = new ToolStripMenuItem();
+            menuDataMaintenance = new ToolStripMenuItem();
+            menuData = new ToolStripMenuItem();
+            menuCascade = new ToolStripMenuItem();
+            menuTile = new ToolStripMenuItem();
+            cascadeToolStripMenuItem = new ToolStripMenuItem();
+            tsMain = new ToolStrip();
             menuMain.SuspendLayout();
             SuspendLayout();
             // 
@@ -58,8 +58,21 @@
             menuMain.Location = new Point(0, 0);
             menuMain.Name = "menuMain";
             menuMain.Size = new Size(1029, 29);
-            menuMain.TabIndex = 1;
+            menuMain.TabIndex = 0;
             menuMain.Text = "menuStrip1";
+            // 
+            // menuFile
+            // 
+            menuFile.DropDownItems.AddRange(new ToolStripItem[] { menuDashboard });
+            menuFile.Name = "menuFile";
+            menuFile.Size = new Size(46, 25);
+            menuFile.Text = "&File";
+            // 
+            // menuDashboard
+            // 
+            menuDashboard.Name = "menuDashboard";
+            menuDashboard.Size = new Size(156, 26);
+            menuDashboard.Text = "Dashboard";
             // 
             // menuRecipe
             // 
@@ -80,73 +93,6 @@
             menuNewRecipe.Size = new Size(182, 26);
             menuNewRecipe.Text = "&New Recipe";
             // 
-            // menuCascade
-            // 
-            menuCascade.DropDownItems.AddRange(new ToolStripItem[] { menuTile, cascadeToolStripMenuItem });
-            menuCascade.Name = "menuCascade";
-            menuCascade.Size = new Size(80, 25);
-            menuCascade.Text = "&Window";
-            // 
-            // menuTile
-            // 
-            menuTile.Name = "menuTile";
-            menuTile.Size = new Size(180, 26);
-            menuTile.Text = "Tile";
-            // 
-            // cascadeToolStripMenuItem
-            // 
-            cascadeToolStripMenuItem.Name = "cascadeToolStripMenuItem";
-            cascadeToolStripMenuItem.Size = new Size(180, 26);
-            cascadeToolStripMenuItem.Text = "Cascade";
-            // 
-            // menuDataMaintenance
-            // 
-            menuDataMaintenance.DropDownItems.AddRange(new ToolStripItem[] { menuData });
-            menuDataMaintenance.Name = "menuDataMaintenance";
-            menuDataMaintenance.Size = new Size(147, 25);
-            menuDataMaintenance.Text = "&Data Maintenance";
-            // 
-            // menuData
-            // 
-            menuData.Name = "menuData";
-            menuData.Size = new Size(180, 26);
-            menuData.Text = "&Edit Data";
-            // 
-            // tsMain
-            // 
-            tsMain.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            tsMain.Location = new Point(0, 29);
-            tsMain.Name = "tsMain";
-            tsMain.Size = new Size(1029, 25);
-            tsMain.TabIndex = 3;
-            tsMain.Text = "toolStrip1";
-            // 
-            // menuFile
-            // 
-            menuFile.DropDownItems.AddRange(new ToolStripItem[] { menuDashboard });
-            menuFile.Name = "menuFile";
-            menuFile.Size = new Size(46, 25);
-            menuFile.Text = "&File";
-            // 
-            // menuDashboard
-            // 
-            menuDashboard.Name = "menuDashboard";
-            menuDashboard.Size = new Size(180, 26);
-            menuDashboard.Text = "Dashboard";
-            // 
-            // menuMeals
-            // 
-            menuMeals.DropDownItems.AddRange(new ToolStripItem[] { menuMealsList });
-            menuMeals.Name = "menuMeals";
-            menuMeals.Size = new Size(63, 25);
-            menuMeals.Text = "&Meals";
-            // 
-            // menuMealsList
-            // 
-            menuMealsList.Name = "menuMealsList";
-            menuMealsList.Size = new Size(180, 26);
-            menuMealsList.Text = "List";
-            // 
             // menuRecipesList
             // 
             menuRecipesList.Name = "menuRecipesList";
@@ -158,6 +104,19 @@
             menuCloneARecipe.Name = "menuCloneARecipe";
             menuCloneARecipe.Size = new Size(182, 26);
             menuCloneARecipe.Text = "Clone a Recipe";
+            // 
+            // menuMeals
+            // 
+            menuMeals.DropDownItems.AddRange(new ToolStripItem[] { menuMealsList });
+            menuMeals.Name = "menuMeals";
+            menuMeals.Size = new Size(63, 25);
+            menuMeals.Text = "&Meals";
+            // 
+            // menuMealsList
+            // 
+            menuMealsList.Name = "menuMealsList";
+            menuMealsList.Size = new Size(104, 26);
+            menuMealsList.Text = "List";
             // 
             // menuCookbooks
             // 
@@ -183,6 +142,47 @@
             menuAutoCreate.Name = "menuAutoCreate";
             menuAutoCreate.Size = new Size(187, 26);
             menuAutoCreate.Text = "Auto-Create";
+            // 
+            // menuDataMaintenance
+            // 
+            menuDataMaintenance.DropDownItems.AddRange(new ToolStripItem[] { menuData });
+            menuDataMaintenance.Name = "menuDataMaintenance";
+            menuDataMaintenance.Size = new Size(147, 25);
+            menuDataMaintenance.Text = "&Data Maintenance";
+            // 
+            // menuData
+            // 
+            menuData.Name = "menuData";
+            menuData.Size = new Size(142, 26);
+            menuData.Text = "&Edit Data";
+            // 
+            // menuCascade
+            // 
+            menuCascade.DropDownItems.AddRange(new ToolStripItem[] { menuTile, cascadeToolStripMenuItem });
+            menuCascade.Name = "menuCascade";
+            menuCascade.Size = new Size(80, 25);
+            menuCascade.Text = "&Window";
+            // 
+            // menuTile
+            // 
+            menuTile.Name = "menuTile";
+            menuTile.Size = new Size(137, 26);
+            menuTile.Text = "Tile";
+            // 
+            // cascadeToolStripMenuItem
+            // 
+            cascadeToolStripMenuItem.Name = "cascadeToolStripMenuItem";
+            cascadeToolStripMenuItem.Size = new Size(137, 26);
+            cascadeToolStripMenuItem.Text = "Cascade";
+            // 
+            // tsMain
+            // 
+            tsMain.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            tsMain.Location = new Point(0, 29);
+            tsMain.Name = "tsMain";
+            tsMain.Size = new Size(1029, 25);
+            tsMain.TabIndex = 1;
+            tsMain.Text = "toolStrip1";
             // 
             // frmMain
             // 

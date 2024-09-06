@@ -85,7 +85,7 @@
             btnSave.Location = new Point(3, 3);
             btnSave.Name = "btnSave";
             btnSave.Size = new Size(75, 30);
-            btnSave.TabIndex = 0;
+            btnSave.TabIndex = 1;
             btnSave.Text = "&Save";
             btnSave.UseVisualStyleBackColor = true;
             // 
@@ -95,7 +95,7 @@
             btnDelete.Location = new Point(106, 3);
             btnDelete.Name = "btnDelete";
             btnDelete.Size = new Size(75, 30);
-            btnDelete.TabIndex = 1;
+            btnDelete.TabIndex = 2;
             btnDelete.Text = "Delete";
             btnDelete.UseVisualStyleBackColor = true;
             // 
@@ -105,7 +105,7 @@
             lblCookbookName.Location = new Point(3, 36);
             lblCookbookName.Name = "lblCookbookName";
             lblCookbookName.Size = new Size(97, 15);
-            lblCookbookName.TabIndex = 2;
+            lblCookbookName.TabIndex = 3;
             lblCookbookName.Text = "Cookbook Name";
             // 
             // lblUser
@@ -114,7 +114,7 @@
             lblUser.Location = new Point(3, 65);
             lblUser.Name = "lblUser";
             lblUser.Size = new Size(30, 15);
-            lblUser.TabIndex = 3;
+            lblUser.TabIndex = 5;
             lblUser.Text = "User";
             // 
             // lblActive
@@ -123,7 +123,7 @@
             lblActive.Location = new Point(3, 146);
             lblActive.Name = "lblActive";
             lblActive.Size = new Size(40, 15);
-            lblActive.TabIndex = 5;
+            lblActive.TabIndex = 8;
             lblActive.Text = "Active";
             // 
             // tblPrice
@@ -178,24 +178,22 @@
             txtPrice.Location = new Point(103, 18);
             txtPrice.Name = "txtPrice";
             txtPrice.Size = new Size(100, 23);
-            txtPrice.TabIndex = 3;
+            txtPrice.TabIndex = 1;
             // 
             // txtTitle
             // 
-            txtTitle.Dock = DockStyle.Fill;
             txtTitle.Location = new Point(106, 39);
             txtTitle.Name = "txtTitle";
             txtTitle.Size = new Size(931, 23);
-            txtTitle.TabIndex = 8;
+            txtTitle.TabIndex = 4;
             // 
             // lstUserName
             // 
-            lstUserName.Dock = DockStyle.Fill;
             lstUserName.FormattingEnabled = true;
             lstUserName.Location = new Point(106, 68);
             lstUserName.Name = "lstUserName";
-            lstUserName.Size = new Size(931, 23);
-            lstUserName.TabIndex = 9;
+            lstUserName.Size = new Size(184, 23);
+            lstUserName.TabIndex = 6;
             // 
             // checkActive
             // 
@@ -203,7 +201,7 @@
             checkActive.Location = new Point(106, 149);
             checkActive.Name = "checkActive";
             checkActive.Size = new Size(15, 14);
-            checkActive.TabIndex = 10;
+            checkActive.TabIndex = 9;
             checkActive.UseVisualStyleBackColor = true;
             // 
             // tblRecipe

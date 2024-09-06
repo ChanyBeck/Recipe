@@ -49,6 +49,7 @@ namespace RecipeWinForms
             checkActive.DataBindings.Add("checked", dtCookbook, "IsActive", false, DataSourceUpdateMode.OnPropertyChanged, CheckState.Indeterminate);
             //checkActive.CheckState = 0;
             LoadRecipe(cookbookid);
+            this.Text = Cookbook.GetCookbookDesc(dtCookbook);
         }
 
         private void LoadRecipe(int cookbookid)
@@ -164,7 +165,7 @@ namespace RecipeWinForms
 
         private void BtnDelete_Click(object? sender, EventArgs e)
         {
-            Delete(); 
+            Delete();
         }
         private void FrmCookbook_Shown(object? sender, EventArgs e)
         {

@@ -209,7 +209,7 @@ namespace RecipeWinForms
 
         private void SetEnableButtons()
         {
-            bool b = recipeid == 0? false : true;
+            bool b = recipeid == 0 ? false : true;
             btnDelete.Enabled = b;
             btnIngredientsSave.Enabled = b;
             btnStepsSave.Enabled = b;
