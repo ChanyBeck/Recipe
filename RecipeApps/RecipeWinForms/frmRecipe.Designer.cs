@@ -120,7 +120,7 @@
             tsMain.Location = new Point(0, 0);
             tsMain.Name = "tsMain";
             tsMain.Size = new Size(242, 28);
-            tsMain.TabIndex = 1;
+            tsMain.TabIndex = 0;
             tsMain.TabStop = true;
             tsMain.Text = "toolStrip1";
             // 
@@ -171,7 +171,7 @@
             tabData.Name = "tabData";
             tabData.SelectedIndex = 0;
             tabData.Size = new Size(1081, 354);
-            tabData.TabIndex = 20;
+            tabData.TabIndex = 13;
             // 
             // tabIngredients
             // 
@@ -198,7 +198,7 @@
             tblIngredients.RowStyles.Add(new RowStyle());
             tblIngredients.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
             tblIngredients.Size = new Size(1067, 314);
-            tblIngredients.TabIndex = 2;
+            tblIngredients.TabIndex = 0;
             // 
             // gridIngredients
             // 
@@ -209,7 +209,7 @@
             gridIngredients.RowHeadersWidth = 51;
             gridIngredients.RowTemplate.Height = 25;
             gridIngredients.Size = new Size(1061, 264);
-            gridIngredients.TabIndex = 0;
+            gridIngredients.TabIndex = 1;
             // 
             // btnIngredientsSave
             // 
@@ -217,7 +217,7 @@
             btnIngredientsSave.Location = new Point(3, 3);
             btnIngredientsSave.Name = "btnIngredientsSave";
             btnIngredientsSave.Size = new Size(75, 38);
-            btnIngredientsSave.TabIndex = 1;
+            btnIngredientsSave.TabIndex = 0;
             btnIngredientsSave.Text = "Save";
             btnIngredientsSave.UseVisualStyleBackColor = true;
             // 
@@ -275,7 +275,7 @@
             lblCaptionUser.Location = new Point(3, 72);
             lblCaptionUser.Name = "lblCaptionUser";
             lblCaptionUser.Size = new Size(42, 21);
-            lblCaptionUser.TabIndex = 0;
+            lblCaptionUser.TabIndex = 3;
             lblCaptionUser.Text = "&User";
             // 
             // lblCaptionCuisine
@@ -285,7 +285,7 @@
             lblCaptionCuisine.Location = new Point(3, 119);
             lblCaptionCuisine.Name = "lblCaptionCuisine";
             lblCaptionCuisine.Size = new Size(61, 21);
-            lblCaptionCuisine.TabIndex = 2;
+            lblCaptionCuisine.TabIndex = 5;
             lblCaptionCuisine.Text = "&Cuisine";
             // 
             // lstUserName
@@ -294,7 +294,7 @@
             lstUserName.Location = new Point(245, 66);
             lstUserName.Name = "lstUserName";
             lstUserName.Size = new Size(196, 29);
-            lstUserName.TabIndex = 1;
+            lstUserName.TabIndex = 4;
             // 
             // lstCuisineType
             // 
@@ -302,7 +302,7 @@
             lstCuisineType.Location = new Point(245, 106);
             lstCuisineType.Name = "lstCuisineType";
             lstCuisineType.Size = new Size(196, 29);
-            lstCuisineType.TabIndex = 3;
+            lstCuisineType.TabIndex = 6;
             // 
             // lblCaptionRecipeName
             // 
@@ -311,7 +311,7 @@
             lblCaptionRecipeName.Location = new Point(3, 35);
             lblCaptionRecipeName.Name = "lblCaptionRecipeName";
             lblCaptionRecipeName.Size = new Size(102, 21);
-            lblCaptionRecipeName.TabIndex = 4;
+            lblCaptionRecipeName.TabIndex = 1;
             lblCaptionRecipeName.Text = "Recipe Name";
             // 
             // txtRecipeName
@@ -320,7 +320,7 @@
             txtRecipeName.Location = new Point(245, 31);
             txtRecipeName.Name = "txtRecipeName";
             txtRecipeName.Size = new Size(839, 29);
-            txtRecipeName.TabIndex = 5;
+            txtRecipeName.TabIndex = 2;
             // 
             // lblCaptionCalories
             // 
@@ -329,7 +329,7 @@
             lblCaptionCalories.Location = new Point(3, 177);
             lblCaptionCalories.Name = "lblCaptionCalories";
             lblCaptionCalories.Size = new Size(66, 21);
-            lblCaptionCalories.TabIndex = 8;
+            lblCaptionCalories.TabIndex = 7;
             lblCaptionCalories.Text = "Calories";
             // 
             // txtCalories
@@ -337,7 +337,7 @@
             txtCalories.Location = new Point(245, 160);
             txtCalories.Name = "txtCalories";
             txtCalories.Size = new Size(572, 29);
-            txtCalories.TabIndex = 9;
+            txtCalories.TabIndex = 8;
             // 
             // lblCaptionRecipeStatus
             // 
@@ -346,7 +346,7 @@
             lblCaptionRecipeStatus.Margin = new Padding(3, 7, 3, 0);
             lblCaptionRecipeStatus.Name = "lblCaptionRecipeStatus";
             lblCaptionRecipeStatus.Size = new Size(102, 21);
-            lblCaptionRecipeStatus.TabIndex = 16;
+            lblCaptionRecipeStatus.TabIndex = 9;
             lblCaptionRecipeStatus.Text = "Recipe Status";
             // 
             // lblRecipeStatus
@@ -357,7 +357,7 @@
             lblRecipeStatus.Location = new Point(245, 219);
             lblRecipeStatus.Name = "lblRecipeStatus";
             lblRecipeStatus.Size = new Size(839, 55);
-            lblRecipeStatus.TabIndex = 17;
+            lblRecipeStatus.TabIndex = 10;
             // 
             // tableLayoutPanel1
             // 
@@ -378,7 +378,7 @@
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 40F));
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 60F));
             tableLayoutPanel1.Size = new Size(839, 66);
-            tableLayoutPanel1.TabIndex = 18;
+            tableLayoutPanel1.TabIndex = 12;
             // 
             // lblCaptionDateDrafted
             // 
@@ -387,7 +387,7 @@
             lblCaptionDateDrafted.Location = new Point(3, 2);
             lblCaptionDateDrafted.Name = "lblCaptionDateDrafted";
             lblCaptionDateDrafted.Size = new Size(62, 21);
-            lblCaptionDateDrafted.TabIndex = 10;
+            lblCaptionDateDrafted.TabIndex = 0;
             lblCaptionDateDrafted.Text = "Drafted";
             // 
             // lblCaptionDatePublished
@@ -397,7 +397,7 @@
             lblCaptionDatePublished.Location = new Point(282, 2);
             lblCaptionDatePublished.Name = "lblCaptionDatePublished";
             lblCaptionDatePublished.Size = new Size(78, 21);
-            lblCaptionDatePublished.TabIndex = 12;
+            lblCaptionDatePublished.TabIndex = 1;
             lblCaptionDatePublished.Text = "Published";
             // 
             // lblCaptionDateArchived
@@ -407,7 +407,7 @@
             lblCaptionDateArchived.Location = new Point(561, 2);
             lblCaptionDateArchived.Name = "lblCaptionDateArchived";
             lblCaptionDateArchived.Size = new Size(71, 21);
-            lblCaptionDateArchived.TabIndex = 14;
+            lblCaptionDateArchived.TabIndex = 2;
             lblCaptionDateArchived.Text = "Archived";
             // 
             // lblDateDrafted
@@ -418,7 +418,7 @@
             lblDateDrafted.Location = new Point(3, 26);
             lblDateDrafted.Name = "lblDateDrafted";
             lblDateDrafted.Size = new Size(273, 40);
-            lblDateDrafted.TabIndex = 11;
+            lblDateDrafted.TabIndex = 3;
             // 
             // lblDatePublished
             // 
@@ -428,7 +428,7 @@
             lblDatePublished.Location = new Point(282, 26);
             lblDatePublished.Name = "lblDatePublished";
             lblDatePublished.Size = new Size(273, 40);
-            lblDatePublished.TabIndex = 15;
+            lblDatePublished.TabIndex = 4;
             // 
             // lblDateArchived
             // 
@@ -438,7 +438,7 @@
             lblDateArchived.Location = new Point(561, 26);
             lblDateArchived.Name = "lblDateArchived";
             lblDateArchived.Size = new Size(275, 40);
-            lblDateArchived.TabIndex = 16;
+            lblDateArchived.TabIndex = 5;
             // 
             // lblStatus
             // 
@@ -446,7 +446,7 @@
             lblStatus.Location = new Point(3, 274);
             lblStatus.Name = "lblStatus";
             lblStatus.Size = new Size(95, 21);
-            lblStatus.TabIndex = 19;
+            lblStatus.TabIndex = 11;
             lblStatus.Text = "Status Dates";
             // 
             // frmRecipe

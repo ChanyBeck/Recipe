@@ -3,7 +3,9 @@
 public partial class App : Application
 {
 	public static bool LoggedIn = false;
-	public App()
+	public static string ConStringSetting = "Server=.\\SQLExpress;Database=HeartyHearthDB";
+
+    public App()
 	{
 		InitializeComponent();
 

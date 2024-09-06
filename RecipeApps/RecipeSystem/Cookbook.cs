@@ -61,5 +61,15 @@ namespace RecipeSystem
 
             SQLUtility.ExecuteSQL(cmd);
         }
+        public static string GetCookbookDesc(DataTable dtcookbook)
+        {
+            string value = "New Cookbook";
+            int pk = SQLUtility.GetValueFromFirstRowAsInt(dtcookbook, "CookbookId");
+            if (pk > 0)
+            {
+                value = SQLUtility.GetValueFromFirstRowAsString(dtcookbook, "Title");
+            }
+            return value;
+        }
     }
 }

@@ -3,20 +3,22 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MAUI_Recipe_App.login"
              Title="login">
-    <VerticalStackLayout>
+    <VerticalStackLayout HorizontalOptions="Center" VerticalOptions="Center">
         <Label 
-            Text="login"
+            Text="Login"
+            FontSize="Header"
             VerticalOptions="Center" 
             HorizontalOptions="Center" />
-        <Grid ColumnDefinitions="Auto, Auto" RowDefinitions="Auto, Auto, Auto, Auto">
-            <Label x:Name="MessageLbl" FontSize="Medium" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"/>
-            <Label Text="User Name" Grid.Row="1" Grid.Column="0"/>
-            <Entry x:Name="UserNameTxt" Grid.Row="1" Grid.Column="1"/>
-            <Label Text="Pasword" Grid.Row="2" Grid.Column="0"/>
-            <Entry x:Name="PasswordTxt" Grid.Row="2" Grid.Column="1"/>
-            <Button x:Name="LoginBtn" Text="Login" Grid.Row="3" Grid.Column="0"/>
-            <Button x:Name="CancelBtn" Text="Cancel" Grid.Row="3" Grid.Column="1"/>
-
-        </Grid>
+        <Border Padding="10">
+            <Grid ColumnDefinitions="Auto, Auto" RowDefinitions="Auto, Auto, Auto, Auto">
+                <Label x:Name="MessageLbl" FontSize="Medium" Grid.Row="0" Grid.Column="0" Grid.ColumnSpan="2"/>
+                <Label Text="User Name" Grid.Row="1" Grid.Column="0"/>
+                <Entry x:Name="UserNameTxt" Grid.Row="1" Grid.Column="1" Text="appadmin"/>
+                <Label Text="Pasword" Grid.Row="2" Grid.Column="0"/>
+                <Entry x:Name="PasswordTxt" Grid.Row="2" Grid.Column="1" IsPassword="True"/>
+                <Button x:Name="LoginBtn" Text="Login" Grid.Row="3" Grid.Column="0" Clicked="LoginBtn_Clicked"/>
+                <Button x:Name="CancelBtn" Text="Cancel" Grid.Row="3" Grid.Column="1" Clicked="CancelBtn_Clicked"/>
+            </Grid>
+        </Border>
     </VerticalStackLayout>
 </ContentPage>

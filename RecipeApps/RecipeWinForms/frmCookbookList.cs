@@ -33,7 +33,7 @@ namespace RecipeWinForms
         {
             this.Show();
             gridCookbook.DataSource = Cookbook.GetList("CookBookListGet");
-            WindowsFormsUtility.FormatGridForSearch(gridCookbook, "CookBook");
+            WindowsFormsUtility.FormatGridForSearch(gridCookbook, "Cookbook");
         }
         private void ShowCookbookForm(int rowindex)
         {

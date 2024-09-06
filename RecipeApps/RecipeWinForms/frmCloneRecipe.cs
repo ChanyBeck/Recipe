@@ -2,6 +2,7 @@
 {
     public partial class frmCloneRecipe : Form
     {
+
         public frmCloneRecipe()
         {
             InitializeComponent();
@@ -20,19 +21,21 @@
             try
             {
                 Recipe.CloneRecipe(recipeid);
+                DataTable dt = SQLUtility.GetDataTable(SQLUtility.GetSQLCommand("RecipeGet"));
+                recipeid = (int)dt.Rows[0]["RecipeId"];
                 if (this.MdiParent != null && this.MdiParent is frmMain)
                 {
-                    ((frmMain)this.MdiParent).OpenForm(typeof(frmList));
+                    ((frmMain)this.MdiParent).OpenForm(typeof(frmRecipe), recipeid);
                     this.Close();
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 MessageBox.Show(ex.Message, Application.ProductName);
             }
             finally
             {
-                Cursor = Cursors.Default; 
+                Cursor = Cursors.Default;
             }
         }
 

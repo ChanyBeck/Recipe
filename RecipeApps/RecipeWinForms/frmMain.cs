@@ -38,7 +38,7 @@ namespace RecipeWinForms
 
         public void OpenForm(Type frmtype, int pk = 0)
         {
-            bool exists = WindowsFormsUtility.DoesFormExist(frmtype);
+            bool exists = WindowsFormsUtility.DoesFormExist(frmtype, pk);
 
             if (exists == false)
             {
@@ -90,11 +90,11 @@ namespace RecipeWinForms
                     frmCloneRecipe f = new();
                     newfrm = f;
                 }
-                else if(frmtype == typeof(frmChangeStatus))
+                else if (frmtype == typeof(frmChangeStatus))
                 {
                     frmChangeStatus f = new();
                     newfrm = f;
-                    f.LoadForm(pk); 
+                    f.LoadForm(pk);
                 }
                 if (newfrm != null)
                 {

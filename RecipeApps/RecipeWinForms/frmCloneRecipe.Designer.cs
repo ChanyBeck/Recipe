@@ -57,7 +57,7 @@
             btnClone.Location = new Point(102, 44);
             btnClone.Name = "btnClone";
             btnClone.Size = new Size(75, 25);
-            btnClone.TabIndex = 0;
+            btnClone.TabIndex = 1;
             btnClone.Text = "&Clone";
             btnClone.UseVisualStyleBackColor = true;
             // 
@@ -68,7 +68,7 @@
             lstRecipeName.Margin = new Padding(3, 15, 3, 3);
             lstRecipeName.Name = "lstRecipeName";
             lstRecipeName.Size = new Size(174, 23);
-            lstRecipeName.TabIndex = 1;
+            lstRecipeName.TabIndex = 0;
             // 
             // frmCloneRecipe
             // 

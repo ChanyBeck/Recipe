@@ -6,7 +6,7 @@ begin
 
     select @CookbookId = isnull(@Cookbookid, 0)
 
-    select c.CookBookId, r.RecipeId, b.BookRecipeId, 'Sequence' = b.BookRecipeSequence, b.BookRecipeSequence
+    select c.CookBookId, r.RecipeId, b.BookRecipeId, 'Sequence' = b.BookRecipeSequence
     from Cookbook c 
     left join BookRecipe b
     on c.CookBookId = b.CookBookId
