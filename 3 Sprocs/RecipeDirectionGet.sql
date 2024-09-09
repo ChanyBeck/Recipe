@@ -1,5 +1,5 @@
 create or alter procedure dbo.RecipeDirectionGet(
-    @RecipeDirectionId int = 0 output, 
+    @RecipeDirectionId int = 0, 
 	@RecipeId int = 0,
     @All bit = 0, 
     @Message varchar(500) = ''  output

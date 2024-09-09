@@ -24,6 +24,8 @@ begin
     from RecipeDirection d 
     where d.RecipeId = @BaseRecipeId
 
+    select * from Recipe r where r.RecipeId = @Recipeid
+
     return @return 
 end
 go 

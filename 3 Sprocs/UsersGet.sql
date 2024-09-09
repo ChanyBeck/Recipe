@@ -9,7 +9,7 @@ begin
 
 	select @All = isnull(@All,0), @UsersId = isnull(@UsersId,0)
 
-	select u.UsersId, u.UserName, u.FirstName, u.LastName
+	select u.UsersId, u.UserName, u.FirstName,  u.LastName
 	from Users u
 	where u.UsersId = @UsersId
 	or @All = 1
