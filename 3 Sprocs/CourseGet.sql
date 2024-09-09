@@ -9,7 +9,7 @@ begin
 
 	select @All = isnull(@All,0), @CourseId = isnull(@CourseId,0)
 
-	select c.CourseId, c.CourseName
+	select c.CourseId, c.CourseName, c.CourseSequence
 	from Course c 
 	where CourseId = @CourseId
 	or @All = 1
