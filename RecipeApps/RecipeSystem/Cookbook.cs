@@ -71,5 +71,13 @@ namespace RecipeSystem
             }
             return value;
         }
+        public static DataTable AutoCreateCookbook(int usersid)
+        {
+            SqlCommand cmd = SQLUtility.GetSQLCommand("CookbookCreate");
+
+            SQLUtility.SetParameterValue(cmd, "@UsersId", usersid);
+
+            return SQLUtility.GetDataTable(cmd);
+        }
     }
 }

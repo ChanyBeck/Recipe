@@ -1,5 +1,6 @@
 using System.Data;
 using System.Data.SqlClient;
+using System.Reflection;
 
 namespace RecipeTest
 {
@@ -14,14 +15,14 @@ namespace RecipeTest
         [Test]
         public void GetCuisineList()
         {
-            int lstcount = SQLUtility.GetFirstColumnFirstRowValue("select total = count(*) from cuisine");
+            int lstcount = SQLUtility.GetFirstColumnFirstRowValue("select total = count(*) from Cuisine");
 
             Assume.That(lstcount > 0, "No records in table, can't test");
 
             TestContext.WriteLine("Num of cuisine in DB = " + lstcount);
             TestContext.WriteLine("Ensure num of rows returned = " + lstcount);
 
-            DataTable dt = Recipe.GetList("cuisine");
+            DataTable dt = Recipe.GetList("CuisineGet");
 
             Assert.IsTrue(dt.Rows.Count == lstcount, "Num of rows returned (" + dt.Rows.Count + ") does not equal to total cuisine types (" + lstcount + ")");
             TestContext.WriteLine("Number of rows in Cuisine = " + dt.Rows.Count);
@@ -30,7 +31,7 @@ namespace RecipeTest
         [Test]
         public void SaveMultipleRows()
         {
-            string sql = "delete Cuisine where cuisinetype in ('TestCuisine1', 'TestCuisine1')";
+            string sql = "delete Cuisine where cuisinetype in ('TestCuisine1', 'TestCuisine2')";
             SQLUtility.ExecuteSQL(sql);
             sql = "update cuisine set cuisinetype = 'cuisine' where cuisinetype = 'TestChange1'";
             SQLUtility.ExecuteSQL(sql);
@@ -49,6 +50,62 @@ namespace RecipeTest
         }
 
         [Test]
+        public void CloneRecipe()
+        {
+            int recipeid = GetExisitingRecipeId();
+            DataTable dtrecipe = SQLUtility.ExecuteSQL("select recipename from recipe where recipeid = " + recipeid);
+            string recipename = SQLUtility.GetValueFromFirstRowAsString(dtrecipe, "recipename");
+
+            Assume.That(recipeid > 0, "No recipes in DB, cannot test");
+
+            TestContext.WriteLine("clone recipe = " + recipename);
+            TestContext.WriteLine("Ensure recipename " + recipename + " -clone exists");
+
+            DataTable dtclone = Recipe.CloneRecipe(recipeid);
+            string recipeclone = dtclone.Rows[0]["recipename"].ToString();
+
+            Assert.IsTrue(recipename + " -clone" == recipeclone, recipeclone + " does not exist");
+            TestContext.WriteLine("new record with recipename = " + recipeclone);
+        }
+        public void UpdateStatus()
+        {
+            int recipeid = GetExisitingRecipeId();
+            DataTable dtrecipe = SQLUtility.ExecuteSQL("select recipename from recipe where recipeid = " + recipeid);
+            string recipename = SQLUtility.GetValueFromFirstRowAsString(dtrecipe, "recipename");
+
+            Assume.That(recipeid > 0, "No recipes in DB, cannot test");
+
+            TestContext.WriteLine("clone recipe = " + recipename);
+            TestContext.WriteLine("Ensure recipename " + recipename + " -clone exists");
+
+            DataTable dtclone = Recipe.CloneRecipe(recipeid);
+            string recipeclone = dtclone.Rows[0]["recipename"].ToString();
+
+            Assert.IsTrue(recipename + " -clone" == recipeclone, recipeclone + " does not exist");
+            TestContext.WriteLine("new record with recipename = " + recipeclone);
+        }
+
+        [Test]
+        public void AutoCreateCookbook()
+        {
+            int cookbookcount = SQLUtility.GetFirstColumnFirstRowValue("select total = count(*) from cookbook");
+            int usersid = SQLUtility.GetFirstColumnFirstRowValue("select top 1 usersid from users");
+
+            Assume.That(usersid > 0, "No users in DB, cannot test");
+
+            TestContext.WriteLine("Total cookbook count in DB = " + cookbookcount);
+            TestContext.WriteLine("Ensure the count in DB now has " + (cookbookcount+1) + " cookbooks and new cookbook added for userid " + usersid);
+
+            DataTable dtcookbook = Cookbook.AutoCreateCookbook(usersid);
+            int cookbookuserid = (int)dtcookbook.Rows[0]["UsersId"];
+
+            int newcookbookcount = SQLUtility.GetFirstColumnFirstRowValue("select total = count(*) from cookbook");
+
+            Assert.IsTrue(newcookbookcount == cookbookcount +1 && cookbookuserid == usersid, "Cookbook count is " + newcookbookcount + " no new records were added.");
+            TestContext.WriteLine("Cookbooks in DB = " + newcookbookcount + ", new cookbook added for " + cookbookuserid);
+        }
+
+        [Test]
         public void GetUsersList()
         {
             int lstcount = SQLUtility.GetFirstColumnFirstRowValue("select total = count(*) from users");
@@ -58,7 +115,7 @@ namespace RecipeTest
             TestContext.WriteLine("Num of users in DB = " + lstcount);
             TestContext.WriteLine("Ensure num of rows returned = " + lstcount);
 
-            DataTable dt = Recipe.GetList("users");
+            DataTable dt = Recipe.GetList("UsersGet");
 
             Assert.IsTrue(dt.Rows.Count == lstcount, "Num of rows returned (" + dt.Rows.Count + ") does not equal to total username in DB (" + lstcount + ")");
             TestContext.WriteLine("Number of rows in users = " + dt.Rows.Count);
