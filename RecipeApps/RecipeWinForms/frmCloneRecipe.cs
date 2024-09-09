@@ -1,7 +1,10 @@
-﻿namespace RecipeWinForms
+﻿using System.Data.SqlClient;
+
+namespace RecipeWinForms
 {
     public partial class frmCloneRecipe : Form
     {
+        DataTable dtrecipe = new();
 
         public frmCloneRecipe()
         {
@@ -20,9 +23,8 @@
             Cursor = Cursors.WaitCursor;
             try
             {
-                Recipe.CloneRecipe(recipeid);
-                DataTable dt = SQLUtility.GetDataTable(SQLUtility.GetSQLCommand("RecipeGet"));
-                //recipeid = (int)dt.Rows[0]["RecipeId"];
+                dtrecipe = Recipe.CloneRecipe(recipeid);
+                recipeid = (int)dtrecipe.Rows[0]["recipeId"];
                 if (this.MdiParent != null && this.MdiParent is frmMain)
                 {
                     ((frmMain)this.MdiParent).OpenForm(typeof(frmRecipe), recipeid);
