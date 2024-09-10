@@ -5,11 +5,16 @@ namespace RecipeSystem
 {
     public class Cookbook
     {
-        public static DataTable GetList(string sprocname)
+        public static DataTable GetList(string sprocname, bool includeblank = false)
         {
             SqlCommand cmd = SQLUtility.GetSQLCommand(sprocname);
 
             cmd.Parameters["@All"].Value = 1;
+            
+            if (includeblank == true)
+            {
+                SQLUtility.SetParameterValue(cmd, "@includeblank", 1);
+            }
 
             return SQLUtility.GetDataTable(cmd);
         }

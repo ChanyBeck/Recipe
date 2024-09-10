@@ -46,10 +46,12 @@ namespace RecipeWinForms
             WindowsFormsUtility.SetControlBinding(txtPrice, bs);
             WindowsFormsUtility.SetControlBinding(lblBookCreated, bs);
 
-            checkActive.DataBindings.Add("checked", dtCookbook, "IsActive", false, DataSourceUpdateMode.OnPropertyChanged, CheckState.Indeterminate);
-            //checkActive.CheckState = 0;
+            checkActive.DataBindings.Add("checked", dtCookbook, "IsActive", true, DataSourceUpdateMode.OnPropertyChanged, CheckState.Indeterminate);
+
             LoadRecipe(cookbookid);
             this.Text = Cookbook.GetCookbookDesc(dtCookbook);
+
+            EnableButtons();
         }
 
         private void LoadRecipe(int cookbookid)
@@ -59,6 +61,14 @@ namespace RecipeWinForms
             gridRecipe.DataSource = dtrecipe;
             WindowsFormsUtility.AddComboBoxToGrid(gridRecipe, Recipe.GetList("RecipeGet"), "RecipeName", "Recipe");
             WindowsFormsUtility.FormatGridForEdit(gridRecipe, "Recipe");
+        }
+
+        private void EnableButtons()
+        {
+                bool b = cookbookid == 0 ? false : true;
+                btnSaveRecipe.Enabled = b;
+                btnDelete.Enabled = b;
+            
         }
         private bool Save()
         {
@@ -71,7 +81,7 @@ namespace RecipeWinForms
                 cookbookid = SQLUtility.GetValueFromFirstRowAsInt(dtCookbook, "CookbookId");
                 this.Tag = cookbookid;
                 SetEnableButtons();
-                //this.Text = GetRecipeDesc();
+                this.Text = Cookbook.GetCookbookDesc(dtCookbook);
                 dtCookbook = Cookbook.Load(cookbookid);
                 bs.DataSource = dtCookbook;
             }

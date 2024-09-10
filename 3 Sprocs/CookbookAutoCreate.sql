@@ -1,5 +1,5 @@
-create or alter procedure dbo.CookBookCreate(
-    @CookBookId int output,
+create or alter procedure dbo.CookbookCreate(
+    @CookbookId int = null output,
     @UsersId int = 0,
     @Message varchar(500) = ''  output
 )  
@@ -24,10 +24,8 @@ drop sequence IncrementSequence
 create sequence IncrementSequence start with 1 increment by 1; 
 
 insert BookRecipe (CookBookId, RecipeId, BookRecipeSequence)
-select c.CookBookId, r.RecipeId, next value for IncrementSequence over(order by r.RecipeName)
-from CookBook c 
-join Users u 
-on u.UsersId = c.UsersId 
+select @CookBookId, r.RecipeId, next value for IncrementSequence over(order by r.RecipeName)
+from users u  
 join Recipe r 
 on r.UsersId = u.UsersId
 where u.UsersId = @UsersId
