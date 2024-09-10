@@ -17,7 +17,6 @@ namespace RecipeWinForms
         public frmMain()
         {
             InitializeComponent();
-            menuSearch.Click += MenuSearch_Click;
             menuNewRecipe.Click += MenuNewRecipe_Click;
             menuTile.Click += MenuTile_Click;
             menuCascade.Click += MenuCascade_Click;
@@ -50,11 +49,6 @@ namespace RecipeWinForms
                     frmRecipe f = new();
                     newfrm = f;
                     f.LoadForm(pk);
-                }
-                else if (frmtype == typeof(frmSearch))
-                {
-                    frmSearch f = new();
-                    newfrm = f;
                 }
                 else if (frmtype == typeof(frmDataMaintenance))
                 {
@@ -138,11 +132,6 @@ namespace RecipeWinForms
         private void MenuNewRecipe_Click(object? sender, EventArgs e)
         {
             OpenForm(typeof(frmRecipe));
-        }
-
-        private void MenuSearch_Click(object? sender, EventArgs e)
-        {
-            OpenForm(typeof(frmSearch));
         }
 
         private void MenuData_Click(object? sender, EventArgs e)

@@ -1,5 +1,5 @@
 create or alter procedure dbo.CookbookGet(
-    @CookbookId int = 0 output, 
+    @CookbookId int null , 
     @All bit = 0, 
     @Message varchar(500) = ''  output
 )  

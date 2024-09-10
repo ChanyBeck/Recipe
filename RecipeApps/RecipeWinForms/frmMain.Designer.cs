@@ -32,7 +32,6 @@
             menuFile = new ToolStripMenuItem();
             menuDashboard = new ToolStripMenuItem();
             menuRecipe = new ToolStripMenuItem();
-            menuSearch = new ToolStripMenuItem();
             menuNewRecipe = new ToolStripMenuItem();
             menuRecipesList = new ToolStripMenuItem();
             menuCloneARecipe = new ToolStripMenuItem();
@@ -76,16 +75,10 @@
             // 
             // menuRecipe
             // 
-            menuRecipe.DropDownItems.AddRange(new ToolStripItem[] { menuSearch, menuNewRecipe, menuRecipesList, menuCloneARecipe });
+            menuRecipe.DropDownItems.AddRange(new ToolStripItem[] { menuNewRecipe, menuRecipesList, menuCloneARecipe });
             menuRecipe.Name = "menuRecipe";
             menuRecipe.Size = new Size(75, 25);
             menuRecipe.Text = "&Recipes";
-            // 
-            // menuSearch
-            // 
-            menuSearch.Name = "menuSearch";
-            menuSearch.Size = new Size(182, 26);
-            menuSearch.Text = "&Search";
             // 
             // menuNewRecipe
             // 
@@ -207,7 +200,6 @@
 
         private MenuStrip menuMain;
         private ToolStripMenuItem menuRecipe;
-        private ToolStripMenuItem menuSearch;
         private ToolStripMenuItem menuNewRecipe;
         private ToolStripMenuItem menuCascade;
         private ToolStripMenuItem menuTile;

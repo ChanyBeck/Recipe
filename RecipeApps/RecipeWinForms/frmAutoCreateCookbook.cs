@@ -23,7 +23,7 @@ namespace RecipeWinForms
 
         private void GetUsersList()
         {
-            WindowsFormsUtility.SetListBinding(lstUserName, DataMaintenance.GetList("Users"), "Users", null);
+            WindowsFormsUtility.SetListBinding(lstUserName, Cookbook.GetList("UsersGet", true), "Users", null);
         }
         private void CreateCookbook()
         {

@@ -27,6 +27,7 @@ select 'French'
 union select 'American'
 union select 'Italian'
 union select 'English'
+union select 'European'
 
 insert Ingredient(IngredientName)
 select 'Sugar'
@@ -51,6 +52,22 @@ union select 'Salt'
 union select 'Whipped Cream Cheese'
 union select 'Sour Cream Cheese'
 union select 'Vanilla Pudding'
+union select 'Garlic'
+union select 'Potato'
+union select 'Bread'
+union select 'Milk'
+union select 'Cherry'
+union select 'Cocoa'
+union select 'Steak'
+union select 'Fish'
+union select 'Maple Syrup'
+union select 'Mustard'
+union select 'Mayo'
+union select 'Lettuce'
+union select 'Cucumbers'
+union select 'Tomatoes'
+union select 'Peppers'
+
 
 insert measurement(measurementType)
 select 'Cup'
@@ -60,6 +77,7 @@ union select 'Oz.'
 union select 'Cloves'
 union select 'Pinch'
 union select 'Stick'
+union select 'Slice'
 
 ;
 with x as(
@@ -72,6 +90,7 @@ with x as(
     union select 'GRamsay', 'English', 'Brownie', 100, null, null
     union select 'GRamsay', 'American', 'Hash Browns', 100, getdate(), null
     union select 'JOliver', 'Italian', 'Eggs', 50, null, null
+    union select 'JOliver', 'European', 'Cherry Pie', 250, getdate(), null
 )
 insert Recipe(UsersId, CuisineId, RecipeName, Calories, DatePublished, DateArchived)
 select u.UsersId, c.CuisineId, x.RecipeName, x.Calories, x.DatePublished, x.DateArchived
@@ -111,6 +130,33 @@ with x as(
     union select 'Butter Muffins', 'Sour Cream Cheese', 'Oz.', 8, 6
     union select 'Butter Muffins', 'Flour', 'Cup', 1, 7
     union select 'Butter Muffins', 'Baking Powder', 'Tsp', 2, 8
+    union select 'Hash Browns', 'Potato',null, 3, 1
+    union select 'Hash Browns', 'Oil', 'Tbsp', 1, 2
+    union select 'Hash Browns', 'Salt', 'Tsp',1,  3
+    union select 'Hash Browns', 'Black Pepper', 'Tsp', 1, 4
+    union select 'Brownie', 'Flour', 'cup', 2, 1    
+    union select 'Brownie', 'Sugar', 'cup', 1, 2
+    union select 'Brownie', 'Eggs', null, 4, 3
+    union select 'Brownie', 'Oil', 'Tbsp', 2, 4
+    union select 'Brownie', 'Baking Powder', 'Tsp', 1, 5
+    union select 'Brownie', 'Cocoa', 'Tbsp', 2, 6
+    union select 'Rib Steak', 'Steak', null, 1, 1
+    union select 'Rib Steak', 'Oil', 'Tbsp', 1, 2
+    union select 'Rib Steak', 'Salt', 'Tsp', 1, 3
+    union select 'Rib Steak', 'Black Pepper', 'Tsp', 1, 4
+    union select 'Eggs', 'Eggs', null, 3, 1
+    union select 'Maple Fish', 'Fish', 'Slice', 4, 1
+    union select 'Maple Fish', 'Maple Syrup', 'Tbsp', 2, 2
+    union select 'Maple Fish', 'Mustard', 'Tbsp', 2, 3
+    union select 'Maple Fish', 'Mayo', 'Tbsp', 1, 4
+    union select 'Maple Fish', 'Salt', 'Tsp', 1, 5
+    union select 'Cherry Pie', 'Chery', 'Cup', 2, 1
+    union select 'Cherry Pie', 'Flour', 'cup', 2, 2    
+    union select 'Cherry Pie', 'Sugar', 'cup', 1, 3
+    union select 'Cherry Pie', 'Eggs', null, 4, 4
+    union select 'Cherry Pie', 'Oil', 'Tbsp', 2, 5
+    union select 'Cherry Pie', 'Baking Powder', 'Tsp', 1, 6
+    
 )
 insert RecipeIngredient(RecipeId, IngredientId, measurementId, Amount, IngredientSequence)
 select r.RecipeId, i.ingredientId, m.measurementId, x.Amount, x.ingredientSequence 
@@ -121,6 +167,88 @@ join ingredient i
 on i.ingredientName = x.ingredient
 left join measurement m 
 on m.measurementType = x.measurement
+
+;
+with x as(
+    select Direction = 'Peel the potatoes and dice', DirectionSequence = 1
+    union select 'Toss with oil and spices', 2
+    union select 'Put it into a lined baking sheet', 3
+    union select 'bake on 425 for 45 minutes.', 4
+)
+insert RecipeDirection(RecipeId, Direction, DirectionSequence)
+select r.RecipeId, x.Direction, x.DirectionSequence
+from x
+join Recipe r 
+on r.RecipeName = 'Hash Browns'
+
+;
+with x as(
+    select Direction = 'First combine sugar, oil and eggs in a bowl', DirectionSequence = 1
+    union select 'mix well', 2
+    union select 'add the rest of the ingredients', 3
+    union select 'mix well', 4
+    union select 'pour the batter into a 9x13 baking sheet', 5
+    union select 'bake on 350 for 50 minutes.', 6
+)
+insert RecipeDirection(RecipeId, Direction, DirectionSequence)
+select r.RecipeId, x.Direction, x.DirectionSequence
+from x
+join Recipe r 
+on r.RecipeName = 'Brownie'
+
+;
+with x as(
+    select Direction = 'First combine flour, sugar, oil and eggs and baking powder in a bowl', DirectionSequence = 1
+    union select 'mix well', 2
+    union select 'pour into a cookie sheet', 3
+    union select 'add cherries', 4
+    union select 'bake on 350 for 20 minutes.', 5
+)
+insert RecipeDirection(RecipeId, Direction, DirectionSequence)
+select r.RecipeId, x.Direction, x.DirectionSequence
+from x
+join Recipe r 
+on r.RecipeName = 'Cherry Pie'
+
+
+;
+with x as(
+    select Direction = 'Rub spices into the steak', DirectionSequence = 1
+    union select 'heat a grill pan', 2
+    union select 'add oil', 3
+    union select 'Sear the steak for 6 minutes on each side.', 4
+)
+insert RecipeDirection(RecipeId, Direction, DirectionSequence)
+select r.RecipeId, x.Direction, x.DirectionSequence
+from x
+join Recipe r 
+on r.RecipeName = 'Rib Steak'
+
+;
+with x as(
+    select Direction = 'In a small pot boil up water', DirectionSequence = 1
+    union select 'Add the eggs', 2
+    union select 'cook for 15 minutes', 3
+    union select 'remove from pot and run under cold water', 4
+)
+insert RecipeDirection(RecipeId, Direction, DirectionSequence)
+select r.RecipeId, x.Direction, x.DirectionSequence
+from x
+join Recipe r 
+on r.RecipeName = 'Eggs'
+
+;
+with x as(
+    select Direction = 'Place the fish in a lined baking sheet', DirectionSequence = 1
+    union select 'Combine all ingredients in a small bowl', 2
+    union select 'Pour over the fish', 3
+    union select 'bake on 425 for 20 minutes.', 4
+)
+insert RecipeDirection(RecipeId, Direction, DirectionSequence)
+select r.RecipeId, x.Direction, x.DirectionSequence
+from x
+join Recipe r 
+on r.RecipeName = 'Maple Fish'
 
 ;
 with x as(
