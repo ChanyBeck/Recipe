@@ -20,7 +20,6 @@ where u.UsersId = @UsersId
 
 select @CookBookId = SCOPE_IDENTITY(); 
 
-drop sequence IncrementSequence
 create sequence IncrementSequence start with 1 increment by 1; 
 
 insert BookRecipe (CookBookId, RecipeId, BookRecipeSequence)

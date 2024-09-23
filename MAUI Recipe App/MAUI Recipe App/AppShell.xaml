@@ -13,9 +13,9 @@
         Route="Home" />
 
         <ShellContent
-        Title="Search"
-        ContentTemplate="{DataTemplate local:Search}"
-        Route="Search" />
+        Title="Recipe List"
+        ContentTemplate="{DataTemplate local:List}"
+        Route="List" />
     </TabBar>
     
     <ShellContent

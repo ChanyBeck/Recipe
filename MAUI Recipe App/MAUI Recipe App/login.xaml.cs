@@ -12,7 +12,7 @@ public partial class login : ContentPage
         try
         {
             MessageLbl.Text = "";
-            DBManager.setconnectionstring(App.ConStringSetting, true, UserNameTxt.Text, PasswordTxt.Text);
+            //DBManager.setconnectionstring(App.ConStringSetting, true, UserNameTxt.Text, PasswordTxt.Text);
             App.LoggedIn = true;
             await Navigation.PopModalAsync();
         }
