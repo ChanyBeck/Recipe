@@ -21,9 +21,9 @@ namespace RecipeWinForms
         }
 
         private void BtnOkay_Click(object? sender, EventArgs e)
-        {
             try
             {
+        {
                 string connstringkey = "";
 #if DEBUG
                 connstringkey = "devconn";

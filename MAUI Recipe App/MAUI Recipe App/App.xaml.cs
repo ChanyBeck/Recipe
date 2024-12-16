@@ -3,7 +3,7 @@
 public partial class App : Application
 {
 	public static bool LoggedIn = false;
-	public static string ConStringSetting = "Server=.\\SQLExpress;Database=HeartyHearthDB";
+	public static string ConStringSetting = "";
 
     public App()
 	{
