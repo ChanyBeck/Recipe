@@ -10,12 +10,17 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="frmLogin.cs" />
     <Compile Remove="frmSearch.cs" />
     <Compile Remove="frmSearch.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>
     <EmbeddedResource Remove="frmSearch.resx" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="frmLogin.cs" />
   </ItemGroup>
 
   <ItemGroup>

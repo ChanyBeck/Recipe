@@ -1,3 +1,4 @@
+using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Reflection;
@@ -6,10 +7,23 @@ namespace RecipeTest
 {
     public class RecipeTests
     {
+        string connstring = ConfigurationManager.ConnectionStrings["devconn"].ConnectionString;
+        string testconnstring = ConfigurationManager.ConnectionStrings["unittestconn"].ConnectionString;
+
+
         [SetUp]
         public void Setup()
         {
-            DBManager.SetConnectionString("Server=.\\SQLExpress;Database=HeartyHearthDB;Trusted_Connection=True;TrustServerCertificate=True;");
+             DBManager.SetConnectionString(testconnstring);
+        }
+
+        private DataTable GetDataTable(string sql)
+        {
+            DataTable dt = new(); 
+            DBManager.SetConnectionString(testconnstring);
+            dt = SQLUtility.ExecuteSQL(sql); 
+            DBManager.SetConnectionString(connstring);
+            return dt; 
         }
 
         [Test]
@@ -32,9 +46,9 @@ namespace RecipeTest
         public void SaveMultipleRows()
         {
             string sql = "delete Cuisine where cuisinetype in ('TestCuisine1', 'TestCuisine2')";
-            SQLUtility.ExecuteSQL(sql);
+            GetDataTable(sql);
             sql = "update cuisine set cuisinetype = 'cuisine' where cuisinetype = 'TestChange1'";
-            SQLUtility.ExecuteSQL(sql);
+            GetDataTable(sql);
             DataTable dt = DataMaintenance.GetList("Cuisine");
             var dr = dt.Rows.Add();
             dr["CuisineType"] = "TestCuisine1";
@@ -44,7 +58,7 @@ namespace RecipeTest
             SQLUtility.SaveDataTable(dt, "CuisineUpdate");
 
             sql = "select * from Cuisine where CuisineType in ('TestCuisine1', 'TestCuisine2', 'TestChange1')";
-            DataTable dtcheck = SQLUtility.ExecuteSQL(sql);
+            DataTable dtcheck = GetDataTable(sql);
             Assert.IsTrue(dtcheck.Rows.Count == 3, $"num rows of dtcheck is {dt.Rows.Count}");
             TestContext.WriteLine($"num rows of dtcheck should be 3 and it is {dt.Rows.Count}");
         }
@@ -53,7 +67,7 @@ namespace RecipeTest
         public void CloneRecipe()
         {
             int recipeid = GetExisitingRecipeId();
-            DataTable dtrecipe = SQLUtility.ExecuteSQL("select recipename from recipe where recipeid = " + recipeid);
+            DataTable dtrecipe = GetDataTable("select recipename from recipe where recipeid = " + recipeid);
             string recipename = SQLUtility.GetValueFromFirstRowAsString(dtrecipe, "recipename");
 
             Assume.That(recipeid > 0, "No recipes in DB, cannot test");
@@ -70,7 +84,7 @@ namespace RecipeTest
         public void UpdateStatus()
         {
             int recipeid = GetExisitingRecipeId();
-            DataTable dtrecipe = SQLUtility.ExecuteSQL("select recipename from recipe where recipeid = " + recipeid);
+            DataTable dtrecipe = GetDataTable("select recipename from recipe where recipeid = " + recipeid);
             string recipename = SQLUtility.GetValueFromFirstRowAsString(dtrecipe, "recipename");
 
             Assume.That(recipeid > 0, "No recipes in DB, cannot test");
@@ -153,7 +167,7 @@ namespace RecipeTest
             and br.BookRecipeId is null
             order by r.RecipeId
             ";
-            DataTable dt = SQLUtility.ExecuteSQL(sql);
+            DataTable dt = GetDataTable(sql); 
             int recipeid = 0;
             string recipedesc = "";
             if (dt.Rows.Count > 0)
@@ -169,7 +183,7 @@ namespace RecipeTest
 
             Recipe.Delete(dt);
 
-            DataTable dtafterdelete = SQLUtility.ExecuteSQL("select * from recipe where recipeid = " + recipeid);
+            DataTable dtafterdelete = GetDataTable("select * from recipe where recipeid = " + recipeid);
 
             Assert.IsTrue(dtafterdelete.Rows.Count == 0, "recipe with id (" + recipeid  + ") exists in DB");
             TestContext.WriteLine("recipe with id " + recipeid + " and recipe name " + recipedesc + " deleted from DB");
@@ -178,7 +192,7 @@ namespace RecipeTest
         [Test]
         public void DeleteRecipeWithRelatedTables()
         {
-            DataTable dt = SQLUtility.ExecuteSQL("select top 1 r.RecipeId, r.Recipename from Recipe r join MealCourseRecipe mcr on mcr.RecipeId = r.RecipeId join BookRecipe br on br.RecipeId = r.RecipeId where r.RecipeStatus = 'Draft' or datediff(day, getdate(), r.DateArchived) < 30");
+            DataTable dt = GetDataTable("select top 1 r.RecipeId, r.Recipename from Recipe r join MealCourseRecipe mcr on mcr.RecipeId = r.RecipeId join BookRecipe br on br.RecipeId = r.RecipeId where r.RecipeStatus = 'Draft' or datediff(day, getdate(), r.DateArchived) < 30");
             int recipeid = 0;
             string recipedesc = "";
             if (dt.Rows.Count > 0)
@@ -222,7 +236,7 @@ namespace RecipeTest
             int recipeid = GetExisitingRecipeId();
             Assume.That(recipeid > 0, "No recipes without related tables in DB, cannot test");
 
-            DataTable dt = SQLUtility.ExecuteSQL("select top 1 recipename from recipe where recipeid <> " + recipeid);
+            DataTable dt = GetDataTable("select top 1 recipename from recipe where recipeid <> " + recipeid);
             string name = dt.Rows[0]["Recipename"].ToString();
             Assume.That(name != "", "Cannot run, no other record in table");
 
@@ -259,7 +273,7 @@ namespace RecipeTest
         [Test]
         public void InsertNewRecord()
         {
-            DataTable dt = SQLUtility.ExecuteSQL("select * from recipe where recipeid = 0");
+            DataTable dt = GetDataTable("select * from recipe where recipeid = 0");
             DataRow r = dt.Rows.Add();
 
             Assume.That(dt.Rows.Count == 1);

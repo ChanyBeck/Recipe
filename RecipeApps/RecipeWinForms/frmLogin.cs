@@ -1,5 +1,4 @@
-﻿using RecipeWinForms.Properties;
-using System.Configuration;
+﻿using System.Configuration;
 
 namespace RecipeWinForms
 {

@@ -8,11 +8,11 @@ create or alter procedure dbo.RecipeGet(
 as 
 begin 
     declare @return int = 0, @count int = 0
-    declare @t table(recipeid int) 
+    declare @t table(RecipeId int) 
 
     select @RecipeName = nullif(@RecipeName, ''), @IncludeBlank = isnull(@IncludeBlank, 0)
 
-    insert @t(r.recipeid)
+    insert @t(r.RecipeId)
     select r.RecipeId
     from Recipe r 
     where r.recipeid = @RecipeId
@@ -23,7 +23,7 @@ begin
     select @count = count(*)
     from @t
 
-    if @count > 20
+    if @count > 30
     begin 
         select @message = concat ('Searching for ', @count, ' Recipes, max search is 20') 
         select @return = 1

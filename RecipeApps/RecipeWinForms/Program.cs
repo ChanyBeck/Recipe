@@ -23,7 +23,8 @@ namespace RecipeWinForms
             //{
             //    MessageBox.Show(ex.Message);
             //}
-            DBManager.SetConnectionString("Server=.\\SQLExpress;Database=HeartyHearthDB;Trusted_Connection=True;TrustServerCertificate=True;");
+            string connstring = ConfigurationManager.ConnectionStrings["devconn"].ConnectionString; 
+            DBManager.SetConnectionString(connstring);
             Application.Run(new frmMain());
         }
     }
