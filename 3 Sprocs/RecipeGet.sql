@@ -25,7 +25,7 @@ begin
 
     if @count > 30
     begin 
-        select @message = concat ('Searching for ', @count, ' Recipes, max search is 20') 
+        select @message = concat ('Searching for ', @count, ' Recipes, max search is 30') 
         select @return = 1
         goto finished
     end 

@@ -145,7 +145,8 @@ namespace RecipeTest
             TestContext.WriteLine("recipe id in DB = " + recipeid);
             TestContext.WriteLine("Ensure recipe id returned = " + recipeid);
 
-            DataTable dt = Recipe.Load(recipeid);
+            bizRecipe recipe = new();
+            DataTable dt = recipe.Load(recipeid);
             int loadedid = (int)dt.Rows[0]["RecipeId"];
 
             Assert.IsTrue(loadedid == recipeid, "recipe id returned (" + loadedid + "), does not equal to DB (" + recipeid + ")");
@@ -181,7 +182,8 @@ namespace RecipeTest
             TestContext.WriteLine("recipe id with no related tables in DB = " + recipeid + " and recipename = " + recipedesc);
             TestContext.WriteLine("Ensure app can delete recipe id " + recipeid);
 
-            Recipe.Delete(dt);
+            bizRecipe recipe = new();
+            recipe.Delete(dt);
 
             DataTable dtafterdelete = GetDataTable("select * from recipe where recipeid = " + recipeid);
 
@@ -290,7 +292,8 @@ namespace RecipeTest
             r["usersid"] = usersid;
             r["Calories"] = 100;
             r["recipename"] = recipename;
-            Recipe.Save(dt);
+            bizRecipe recipe = new();
+            recipe.Save(dt);
 
             int newid = SQLUtility.GetFirstColumnFirstRowValue("select * from recipe where recipename = '" + recipename + "'");
             Assert.IsTrue(newid > 0, "recipe with name " + recipename + "is not found in DB");

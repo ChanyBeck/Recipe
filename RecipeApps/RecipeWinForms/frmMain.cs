@@ -36,11 +36,11 @@ namespace RecipeWinForms
         {
             frmLogin f = new() { StartPosition = FormStartPosition.CenterParent };
             f.ShowDialog();
-            if (bool== false)
+            if (bool == false)
             {
                 this.Close();
                 Application.Exit();
-                return; 
+                return;
             }
             OpenForm(typeof(frmDashboard));
         }
