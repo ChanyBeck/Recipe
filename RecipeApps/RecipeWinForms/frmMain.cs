@@ -28,22 +28,22 @@ namespace RecipeWinForms
             menuNewCookbook.Click += MenuNewCookbook_Click;
             menuCloneARecipe.Click += MenuCloneARecipe_Click;
             menuAutoCreate.Click += MenuAutoCreate_Click;
-            this.Shown += FrmMain_Shown;
+            //this.Shown += FrmMain_Shown;
         }
 
 
-        private void FrmMain_Shown(object? sender, EventArgs e)
-        {
-            frmLogin f = new() { StartPosition = FormStartPosition.CenterParent };
-            f.ShowDialog();
-            if (bool == false)
-            {
-                this.Close();
-                Application.Exit();
-                return;
-            }
-            OpenForm(typeof(frmDashboard));
-        }
+        //private void FrmMain_Shown(object? sender, EventArgs e)
+        //{
+        //    frmLogin f = new() { StartPosition = FormStartPosition.CenterParent };
+        //    f.ShowDialog();
+        //    if (bool == false)
+        //    {
+        //        this.Close();
+        //        Application.Exit();
+        //        return;
+        //    }
+        //    OpenForm(typeof(frmDashboard));
+        //}
 
         public void OpenForm(Type frmtype, int pk = 0)
         {

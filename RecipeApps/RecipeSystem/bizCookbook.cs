@@ -8,7 +8,7 @@ namespace RecipeSystem
 {
     public class bizCookbook : bizObject
     {
-        public bizCookbook() : base("Cookbook")
+        public bizCookbook() 
         {
 
         }
