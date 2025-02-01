@@ -41,6 +41,15 @@ namespace RecipeSystem
                 return _lstcuisine;
             }
         }
+        public bizCuisine? Cuisine
+        {
+            get => _lstcuisine?.FirstOrDefault(c => c.CuisineId == this.CuisineId);
+            set
+            {
+                this.CuisineId = value == null ? 0 : value.CuisineId;
+                InvokePropertyChanged();
+            }
+        }
         public int RecipeId
         {
             get { return _recipeId; }

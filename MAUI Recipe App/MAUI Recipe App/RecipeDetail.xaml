@@ -26,7 +26,7 @@
             <Label x:Name="lblmessage" Grid.Column="0" Grid.Row="0" Grid.ColumnSpan="4" TextColor="{StaticResource Key=Danger}" />
 
             <Label Grid.Column="0" Grid.Row="1" Text="Cuisine" />
-            <Picker Grid.Column="1" Grid.Row="1"  ItemsSource="{Binding CuisineList}" ItemDisplayBinding="{Binding CuisineType}"/>
+            <Picker Grid.Column="1" Grid.Row="1"  ItemsSource="{Binding CuisineList}" ItemDisplayBinding="{Binding CuisineType}" SelectedItem="{Binding Cuisine}"/>
             <Label Grid.Column="2" Grid.Row="1" Text="Recipe Name" />
             <Entry Text="{Binding Path=RecipeName}" Grid.Column="3" Grid.Row="1" Placeholder="RecipeName"/>
 
