@@ -7,13 +7,13 @@
         <Label Text="Recipe Name" Grid.Column="0" Grid.Row="0"/>
         <Entry x:Name="RecipeNameTxt" Grid.Column="1" Grid.Row="0" MinimumWidthRequest="200"/>
         <Button x:Name="SearchBtn" Text="Search"  Grid.Column="2" Grid.Row="0" Clicked="SearchBtn_Clicked"/>
-        <ListView x:Name="RecipeLst" Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="3">
+        <ListView x:Name="RecipeLst" Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="3" ItemTapped="RecipeLst_ItemTapped">
             <ListView.ItemTemplate>
                 <DataTemplate>
                     <ViewCell>
                         <Grid RowDefinitions="Auto" ColumnDefinitions="Auto, *" ColumnSpacing="20">
-                            <Label Grid.Row="0" Grid.Column="0" Text="{Binding Path=[Calories]}"/>
-                            <Label Grid.Row="0" Grid.Column="1" Text="{Binding Path=[RecipeName]}"/>
+                            <Label Grid.Row="0" Grid.Column="0" Text="{Binding Calories}"/>
+                            <Label Grid.Row="0" Grid.Column="1" Text="{Binding RecipeName}"/>
                         </Grid>
                     </ViewCell>
                 </DataTemplate>

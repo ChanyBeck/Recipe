@@ -77,6 +77,9 @@
 	  <MauiXaml Update="login.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
+	  <MauiXaml Update="RecipeDetail.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
 	  <MauiXaml Update="RecipeSearch.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
