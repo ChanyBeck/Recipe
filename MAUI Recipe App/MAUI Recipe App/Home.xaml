@@ -3,10 +3,12 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MAUI_Recipe_App.Home"
              Title="Home">
-    <VerticalStackLayout>
-        <Label 
-            Text="home"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
+    <VerticalStackLayout x:Name="DashboardLst" HorizontalOptions="Center">
+        <BindableLayout.ItemTemplate>
+            <DataTemplate>
+                <Button  Text="{Binding DashboardNum}"/>
+            </DataTemplate>
+        </BindableLayout.ItemTemplate>
     </VerticalStackLayout>
+
 </ContentPage>

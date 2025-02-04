@@ -3,10 +3,11 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="MAUI_Recipe_App.RecipeSearch"
              Title="RecipeSearch">
-    <Grid ColumnDefinitions="Auto, Auto, Auto" RowDefinitions="Auto, *" HorizontalOptions="Center" RowSpacing="10" ColumnSpacing="10">
+    <Grid ColumnDefinitions="Auto, Auto, Auto, Auto" RowDefinitions="Auto, *" HorizontalOptions="Center" RowSpacing="10" ColumnSpacing="10">
         <Label Text="Recipe Name" Grid.Column="0" Grid.Row="0"/>
         <Entry x:Name="RecipeNameTxt" Grid.Column="1" Grid.Row="0" MinimumWidthRequest="200"/>
         <Button x:Name="SearchBtn" Text="Search"  Grid.Column="2" Grid.Row="0" Clicked="SearchBtn_Clicked"/>
+        <Button x:Name="NewBtn" Text="New Recipe" Grid.Column="3" Grid.Row="0" Clicked="NewBtn_Clicked"/>
         <ListView x:Name="RecipeLst" Grid.Column="0" Grid.Row="2" Grid.ColumnSpan="3" ItemTapped="RecipeLst_ItemTapped">
             <ListView.ItemTemplate>
                 <DataTemplate>

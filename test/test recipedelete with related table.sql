@@ -10,6 +10,6 @@ order by r.RecipeId
 
 select * from Recipe r where r.RecipeId = @RecipeId
 
-exec RecipeDelete @RecipeId = @rescipeid
+exec RecipeDelete @RecipeId = @recipeid
 
 select * from Recipe r where r.RecipeId = @RecipeId

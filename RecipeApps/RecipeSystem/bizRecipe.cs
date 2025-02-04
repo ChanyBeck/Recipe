@@ -18,11 +18,12 @@ namespace RecipeSystem
         private int _usersId;
         private int _cuisineId;
         private string _recipename = "";
-        private int _calories;
-        private DateTime _datedrafted;
+        private int? _calories;
+        private DateTime? _datedrafted;
         private DateTime? _datepublished;
         private DateTime? _datearchived;
         private List<bizCuisine> _lstcuisine;
+        private List<bizRecipeIngredient> _lstrecipeing;
         public List<bizRecipe> Search(string recipename)
         {
             SqlCommand cmd = SQLUtility.GetSQLCommand("RecipeGet");
@@ -36,7 +37,7 @@ namespace RecipeSystem
             {
                 if(_lstcuisine == null)
                 {
-                    _lstcuisine = new bizCuisine().GetList();
+                    _lstcuisine = new bizCuisine().GetList(true);
                 }
                 return _lstcuisine;
             }
@@ -48,6 +49,17 @@ namespace RecipeSystem
             {
                 this.CuisineId = value == null ? 0 : value.CuisineId;
                 InvokePropertyChanged();
+            }
+        }
+        public List<bizRecipeIngredient> RecipeIngredientList
+        {
+            get
+            {
+                if(_lstrecipeing == null)
+                {
+                    _lstrecipeing = new bizRecipeIngredient().Load(this.RecipeId);
+                }
+                return _lstrecipeing;
             }
         }
         public int RecipeId
@@ -101,7 +113,7 @@ namespace RecipeSystem
             }
         }
 
-        public int Calories
+        public int? Calories
         {
             get { return _calories; }
             set
@@ -114,7 +126,7 @@ namespace RecipeSystem
             }
         }
 
-        public DateTime DateDrafted
+        public DateTime? DateDrafted
         {
             get { return _datedrafted; }
             set
